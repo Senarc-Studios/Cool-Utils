@@ -13,7 +13,7 @@ packages = [
     "utils"
 ]
 
-setup(name="fusion.py",
+setup(name="cool-utils",
       author="Benitz Original",
       author_email="benitzcoding@yahoo.com",
       url="https://github.com/Senarc-Studios/Cool-Utils",
@@ -22,10 +22,10 @@ setup(name="fusion.py",
         "Issue tracker": "https://github.com/Senarc-Studios/Cool-Utils/issues",
         "Github": "https://github.com/Senarc-Studios/Cool-Utils/tree/Development"
       },
-      version="1.0.0",
+      version="1.0.1",
       packages=packages,
       license="BSD",
-      description="",
+      description="This is Cool Utility tools that you can use in python.",
       long_description=README,
       long_description_content_type="text/x-rst",
       include_package_data=True,
