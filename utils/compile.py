@@ -74,21 +74,21 @@ class Compile:
 		return compiled_string
 
 	def to_string(
-		list,
+		item_list,
 		joints: str=MISSING,
 		startwith: str=MISSING,
 		endwith: str=MISSING
 	):
-		if not isinstance(string_list, list):
+		if not isinstance(item_list, list):
 			raise TypeError(f"ERROR: Only Lists are supported to be compiled.")
 		compiled_string = ""
 		if startwith is not None:
 			compiled_string = startwith + compiled_string
 		count = 0
 
-		for string in list:
+		for string in item_list:
 			compiled_string = compiled_string + f"{string}"
-			if count is not len(list) and joints is not MISSING:
+			if count is not len(item_list) and joints is not MISSING:
 				compiled_string = joints
 			count = count + 1
 
@@ -100,12 +100,12 @@ class Compile:
 	def numbers(
 		number_list,
 		joints: int=MISSING,
-		start: int=MISSING,
+		startwith: int=MISSING,
 		endwith: int=MISSING
 	):
-		if not isinstance(string_list, list):
+		if not isinstance(number_list, list):
 			raise TypeError(f"ERROR: Only Lists are supported to be compiled.")
-		check_type(string_list, int)
+		check_type(number_list, int)
 		compiled_string = ""
 		if startwith is not None:
 			compiled_string = f"{startwith}" + compiled_string

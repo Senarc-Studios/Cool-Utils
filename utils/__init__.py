@@ -34,19 +34,7 @@ __title__ = 'cool-utils'
 __author__ = 'BenitzCoding'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2021-present BenitzCoding'
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 from compile import Compile
-from json_tools import *
-
-class VersionInfo(NamedTuple):
-    major: int
-    minor: int
-    micro: int
-    releaselevel: Literal["alpha", "beta", "candidate", "final"]
-    serial: int
-
-
-version_info: VersionInfo = VersionInfo(major=1, minor=0, micro=1, releaselevel='alpha', serial=0)
-
-logging.getLogger(__name__).addHandler(logging.NullHandler())
+from json_utils import *

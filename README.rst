@@ -81,6 +81,7 @@ Collaborators
 This wouldn’t be made possible without these people
 
 1. `BenitzCoding <https://github.com/BenitzCoding>`__
+2. `JDJG Inc. Official <https://github.com/JDJGInc>`__
 
 .. |Discord| image:: https://discord.com/api/guilds/886543799843688498/embed.png
    :target: https://discord.gg/5YY3W83YWg
