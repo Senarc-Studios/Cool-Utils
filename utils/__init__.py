@@ -34,8 +34,9 @@ __title__ = 'cool-utils'
 __author__ = 'BenitzCoding'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2021-present BenitzCoding'
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
+from compile import Compile
 from json_tools import *
 
 class VersionInfo(NamedTuple):

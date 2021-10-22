@@ -32,7 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import json
 
-def get_data(file, variable):
+def get_data(file: str, variable: str):
 	try:
 		with open(f"{file}.json", "r") as jsonFile:
 			data = json.load(jsonFile)
@@ -40,7 +40,7 @@ def get_data(file, variable):
 	except:
 		return None
 
-def register_value(file, variable, value):
+def register_value(file: str, variable: str, value: str):
 	try:
 		with open(f"{file}.json", "r") as jsonFile:
 			data = json.load(jsonFile)
@@ -56,3 +56,6 @@ def register_value(file, variable, value):
 	
 		with open(f"{file}.json", "w") as jsonFile:
 			json.dump(data, jsonFile)
+
+def format(json: dict, indent: int=2):
+	return json.dumps(json, indent=indent)
