@@ -1,6 +1,7 @@
+"""
 BSD 3-Clause License
 
-Copyright (c) 2021-present, Benitz Original
+Copyright (c) 2021-present, BenitzCoding
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -27,3 +28,24 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+"""
+
+__title__ = 'cool-utils'
+__author__ = 'BenitzCoding'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2021-present BenitzCoding'
+__version__ = '1.0.0'
+
+from json_tools import *
+
+class VersionInfo(NamedTuple):
+    major: int
+    minor: int
+    micro: int
+    releaselevel: Literal["alpha", "beta", "candidate", "final"]
+    serial: int
+
+
+version_info: VersionInfo = VersionInfo(major=1, minor=0, micro=0, releaselevel='alpha', serial=0)
+
+logging.getLogger(__name__).addHandler(logging.NullHandler())

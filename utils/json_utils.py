@@ -1,6 +1,7 @@
+"""
 BSD 3-Clause License
 
-Copyright (c) 2021-present, Benitz Original
+Copyright (c) 2021-present, BenitzCoding
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -27,3 +28,31 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+"""
+
+import json
+
+def get_data(file, variable):
+	try:
+		with open(f"{file}.json", "r") as jsonFile:
+			data = json.load(jsonFile)
+		return data[variable]
+	except:
+		return None
+
+def register_value(file, variable, value):
+	try:
+		with open(f"{file}.json", "r") as jsonFile:
+			data = json.load(jsonFile)
+	
+		data[variable] = value
+	
+		with open(f"{file}.json", "w") as jsonFile:
+			json.dump(data, jsonFile)
+	
+	except:
+		data = {}
+		data[variable] = value
+	
+		with open(f"{file}.json", "w") as jsonFile:
+			json.dump(data, jsonFile)
