@@ -29,3 +29,18 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
+
+
+# I don't know what to call this, but TextForms sounds like a nice name I guess. It basically gives all forms of text, for example the word "Hello", the following comment will have all it's forms
+# HELLO, HELLo, HELlO, HELlo, HElLO, HElLo, HEllO, HEllo, HeLLO, HeLLo, HeLlO, HeLlo, HelLO, HelLo, HellO, Hello, hELLO, hELLo, hELlO, hELlo, hElLO, hElLo, hEllO, hEllo, heLLO, heLLo, heLlO, heLlo, helLO, helLo, hellO, hello
+# This took me ages to make lmao
+
+def TextForms(text, sep = None):
+    if sep is None:
+         sep = ', ' # seperator
+    liste = [] # all results
+    for x in itertools.product(*zip(text.upper(), text.lower())):
+      first = "".join(x) # making words connected
+      liste.append(first) # appending words
+    final = sep.join(list1) # getting a string with a custom seperator that has all the words
+    return final # the final result!
