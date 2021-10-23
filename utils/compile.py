@@ -45,7 +45,7 @@ def check_type(list, item_type):
 		if isinstance(item, item_type):
 			continue
 		else:
-			raise TypeError(f"ERROR: Only {item_type} is supported for this function.")
+			raise TypeError(f"Only {item_type} is supported for this function.")
 
 class Compile:
 	def string(
@@ -55,7 +55,7 @@ class Compile:
 		endwith: str=MISSING
 	):
 		if not isinstance(string_list, list):
-			raise TypeError(f"ERROR: Only Lists are supported to be compiled.")
+			raise TypeError(f"Only Lists are supported to be compiled.")
 		check_type(string_list, str)
 		compiled_string = ""
 		if startwith is not None:
@@ -67,6 +67,7 @@ class Compile:
 			if count is not len(string_list) and joints is not MISSING:
 				compiled_string = compiled_string + joints
 			count = count + 1
+		compiled_string = compiled_string[:-1]
 
 		if endwith is not None:
 			compiled_string = compiled_string + endwith
@@ -80,7 +81,7 @@ class Compile:
 		endwith: str=MISSING
 	):
 		if not isinstance(item_list, list):
-			raise TypeError(f"ERROR: Only Lists are supported to be compiled.")
+			raise TypeError(f"Only Lists are supported to be compiled.")
 		compiled_string = ""
 		if startwith is not None:
 			compiled_string = startwith + compiled_string
@@ -91,6 +92,7 @@ class Compile:
 			if count is not len(item_list) and joints is not MISSING:
 				compiled_string = compiled_string + joints
 			count = count + 1
+		compiled_string = compiled_string[:-1]
 
 		if endwith is not None:
 			compiled_string = compiled_string + endwith
@@ -104,7 +106,7 @@ class Compile:
 		endwith: int=MISSING
 	):
 		if not isinstance(number_list, list):
-			raise TypeError(f"ERROR: Only Lists are supported to be compiled.")
+			raise TypeError(f"Only Lists are supported to be compiled.")
 		check_type(number_list, int)
 		compiled_string = ""
 		if startwith is not None:
@@ -116,6 +118,7 @@ class Compile:
 			if count is not len(list) and joints is not MISSING:
 				compiled_string = compiled_string + f"{joints}"
 			count = count + 1
+		compiled_string = compiled_string[:-1]
 
 		if endwith is not None:
 			compiled_string = compiled_string + f"{endwith}"

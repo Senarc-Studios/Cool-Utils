@@ -32,10 +32,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 __title__ = 'cool-utils'
 __author__ = 'BenitzCoding'
-__license__ = 'MIT'
+__license__ = 'BSD'
 __copyright__ = 'Copyright 2021-present BenitzCoding'
-__version__ = '1.0.7'
+__version__ = '1.0.8'
 
 from .compile import Compile
-#from .discord import Discord
+# from .discord import Discord
 from .json_utils import *
