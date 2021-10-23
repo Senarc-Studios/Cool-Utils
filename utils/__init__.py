@@ -34,7 +34,7 @@ __title__ = 'cool-utils'
 __author__ = 'BenitzCoding'
 __license__ = 'BSD'
 __copyright__ = 'Copyright 2021-present BenitzCoding'
-__version__ = '1.0.9'
+__version__ = '1.1.0'
 
 from .compile import Compile
 # from .discord import Discord

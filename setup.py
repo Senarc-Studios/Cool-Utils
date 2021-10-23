@@ -23,7 +23,7 @@ setup(
 		"Issue tracker": "https://github.com/Senarc-Studios/Cool-Utils/issues",
 		"Github": "https://github.com/Senarc-Studios/Cool-Utils/tree/Development"
 	},
-	version="1.0.9",
+	version="1.1.0",
 	packages=packages,
 	license="BSD",
 	description="This is Cool Utility tools that you can use in python.",
