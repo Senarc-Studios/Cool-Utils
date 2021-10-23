@@ -2,12 +2,12 @@ import logging
 import discord
 from discord.ext import commands
 from typing import TypeVar
-from logging import Logger as log
+import logging as log
 import re
 import aiohttp
 import contextlib
 
-logging.getLogger(__name__)
+log.getLogger(__name__)
 
 MISSING = 0.0
 
