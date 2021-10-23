@@ -65,7 +65,7 @@ class Compile:
 		for string in string_list:
 			compiled_string = compiled_string + string
 			if count is not len(string_list) and joints is not MISSING:
-				compiled_string = joints
+				compiled_string = compiled_string + joints
 			count = count + 1
 
 		if endwith is not None:
@@ -89,7 +89,7 @@ class Compile:
 		for string in item_list:
 			compiled_string = compiled_string + f"{string}"
 			if count is not len(item_list) and joints is not MISSING:
-				compiled_string = joints
+				compiled_string = compiled_string + joints
 			count = count + 1
 
 		if endwith is not None:
@@ -114,7 +114,7 @@ class Compile:
 		for string in list:
 			compiled_string = compiled_string + f"{string}"
 			if count is not len(list) and joints is not MISSING:
-				compiled_string = f"{joints}"
+				compiled_string = compiled_string + f"{joints}"
 			count = count + 1
 
 		if endwith is not None:
