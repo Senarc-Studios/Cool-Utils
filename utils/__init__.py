@@ -34,8 +34,8 @@ __title__ = 'cool-utils'
 __author__ = 'BenitzCoding'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2021-present BenitzCoding'
-__version__ = '1.0.5'
+__version__ = '1.0.6'
 
 from .compile import Compile
-from .discord import Discord
+#from .discord import Discord
 from .json_utils import *
