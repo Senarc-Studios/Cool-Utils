@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 from typing import TypeVar
+import itertools
 
 MISSING = 0.0
 
@@ -48,6 +49,15 @@ def check_type(list, item_type):
 			raise TypeError(f"Only {item_type} is supported for this function.")
 
 class Compile:
+	def all_possible_cases(
+		text: str
+	):
+		results = []
+		for x in itertools.product(*zip(text.upper(), text.lower())):
+			first = "".join(x)
+			results.append(first)
+		return results
+
 	def string(
 		string_list,
 		joints: str=MISSING,
