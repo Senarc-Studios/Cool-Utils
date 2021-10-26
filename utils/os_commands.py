@@ -29,13 +29,13 @@ def get_command(command: str):
 		return PYTHON[sys.platform]
 
 	elif command == "pip":
-		return PIP[sys.platfrom]
+		return PIP[sys.platform]
 
 	elif command == "clear":
-		return CLEAR[sys.platfrom]
+		return CLEAR[sys.platform]
 
 	elif command == "ls":
-		return LS[sys.platfrom]
+		return LS[sys.platform]
 
 	else:
 		return command
