@@ -1,4 +1,13 @@
+import os
 import sys
+from dotenv import find_dotenv, load_dotenv
+
+def get_env(variable: str):
+	try:
+		load_dotenv(find_dotenv())
+		return os.getenv[f"{variable}"]
+	except:
+		return None
 
 def get_command(command: str):
 	PYTHON = {
