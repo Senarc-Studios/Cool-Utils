@@ -1,3 +1,3 @@
 python-dotenv
 fusion.py
-intertools
+itertools
