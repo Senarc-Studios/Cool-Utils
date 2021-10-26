@@ -5,7 +5,11 @@ from dotenv import find_dotenv, load_dotenv
 def get_env(variable: str):
 	try:
 		load_dotenv(find_dotenv())
-		return os.getenv[f"{variable}"]
+		value = os.getenv[f"{variable}"]
+		if value is not "":
+			return value
+		else:
+			return None
 	except:
 		return None
 
