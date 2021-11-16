@@ -78,5 +78,8 @@ class Cache:
 		return
 
 	def remove( variable: str ):
-		del cache[variable]
-		return
+		try:
+			del cache[variable]
+			return True
+		except:
+			return False
