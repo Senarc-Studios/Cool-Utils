@@ -58,7 +58,13 @@ class Cache:
 		return cache["size"]
 
 	def clear():
+		key_list = []
 		for key, value in cache.items():
+			if key == "size":
+				continue
+			key_list.append(key)
+		
+		for key in key_list:
 			del cache[key]
 
 		default_payload = {
@@ -69,10 +75,5 @@ class Cache:
 		return
 
 	def remove( variable: str ):
-		for key, value in cache.items():
-			if key == variable:
-				del cache[key]
-				break
-
-			else:
-				continue
+		del cache[variable]
+		return
