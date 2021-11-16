@@ -45,7 +45,7 @@ T = TypeVar('T', bound='Cache')
 class Cache:
 	def store( variable: str, value ):
 		payload = {
-			"size": (1 + cache["payload"])
+			"size": (1 + cache["size"])
 		}
 		cache.insert(payload)
 		return
