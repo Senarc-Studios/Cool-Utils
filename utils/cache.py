@@ -30,14 +30,48 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-__title__ = 'cool-utils'
-__author__ = 'BenitzCoding'
-__license__ = 'BSD'
-__copyright__ = 'Copyright 2021-present BenitzCoding'
-__version__ = '1.1.3'
+from typing import TypeVar
 
-from .compile import Compile
-# from .discord import Discord
-from .json_utils import *
-from .os import *
-from .cache import Cache
+cache = {
+	"size": 0
+}
+
+__all__ = (
+	'Cache'
+)
+
+T = TypeVar('T', bound='Cache')
+
+class Cache:
+	def store( variable: str, value ):
+		payload = {
+			"size": (1 + cache["payload"])
+		}
+		cache.insert(payload)
+		return
+
+	def load( variable: str ):
+		return cache[variable]
+
+	def size():
+		return cache["size"]
+
+	def clear():
+		for key, value in cache:
+			del cache[key]
+
+		default_payload = {
+			"size": 0
+		}
+
+		cache.update(default_payload)
+		return
+
+	def remove( variable: str ):
+		for key, value in cache:
+			if key == variable:
+				del cache[key]
+				break
+
+			else:
+				continue
