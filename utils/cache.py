@@ -52,7 +52,10 @@ class Cache:
 		return
 
 	def load( variable: str ):
-		return cache[variable]
+		try:
+			return cache[variable]
+		except:
+			return None
 
 	def size():
 		return cache["size"]
