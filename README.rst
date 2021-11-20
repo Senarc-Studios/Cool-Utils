@@ -1,6 +1,9 @@
 Cool Utils
 ==========
 
+
+`Documentation <https://github.com/Senarc-Studios/Cool-Utils/wiki/Documentation>`_
+
 This is Cool Utility tools that you can use in python. There are a few
 tools that you might find very useful, you can use this on pretty much
 any project and some utils might help you a lot and save so much time
@@ -74,8 +77,6 @@ Examples
    print(invalid_data)
    >> bar
    >> None
-
-`Documentation <https://github.com/Senarc-Studios/Cool-Utils/wiki/Documentation>`_
 
 Collaborators
 -------------
