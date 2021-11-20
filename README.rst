@@ -52,7 +52,7 @@ Examples
 
 .. code:: python
 
-   from utils import Compile
+   from cool_utils import Compile
 
    strings = ["This", "Is", "A", "String"]
    num_list = [9, 4, 2]
@@ -65,7 +65,7 @@ Examples
 
 .. code:: python
 
-   import utils
+   import cool_utils
 
    utils.register_value(file="sample", variable="foo", value="bar") # This creates a JSON file.
    data = utils.get_data(file="sample", variable="foo")
