@@ -85,3 +85,21 @@ class Links:
 
 		else:
 			return string
+
+	def find(content: str) -> list:
+		word_list = []
+		character_list = [';', get_slash(), '|', '-', '"', '&', '$', '@', '+', '^', '_', '<', '[', '!', '=', '>', '(', ')', '}', "'", '`', ']', '#', '%', '?', '*', '{', ',', '~']
+
+		link_list = []
+
+		for character in character_list:
+			text = content.replace(character, " ")
+		for word in text.split(" "):
+			word_list.append(word)
+		for word in word_list:
+			if re.match(REGEX, word):
+				link_list.append(word)
+			else:
+				continue
+
+		return link_list
