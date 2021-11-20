@@ -30,15 +30,58 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-__title__ = 'cool-utils'
-__author__ = 'BenitzCoding'
-__license__ = 'BSD'
-__copyright__ = 'Copyright 2021-present BenitzCoding'
-__version__ = '1.1.9'
+import re
+from typing import TypeVar
 
-from .compile import Compile
-# from .discord import Discord
-from .json_utils import *
-from .os import *
-from .cache import Cache
-from .links import Links
+REGEX = "((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,4}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*"
+MISSING = 0.0
+
+__all__ = (
+	'Links'
+)
+
+T = TypeVar('T', bound='Links')
+
+def get_slash():
+	slash = "\ "
+	slash = slash.replace(" ", "")
+	return slash
+
+class Links:
+	def check(content: str) -> bool:
+		word_list = []
+		character_list = [';', get_slash(), '|', '-', '"', '&', '$', '@', '+', '^', '_', '<', '[', '!', '=', '>', '(', ')', '}', "'", '`', ']', '#', '%', '?', '*', '{', ',', '~']
+
+		for character in character_list:
+			text = content.replace(character, " ")
+		for word in text.split(" "):
+			word_list.append(word)
+		for word in word_list:
+			if re.match(REGEX, word):
+				return True
+			else:
+				return False
+
+	def censor(content: str, censor: str = "*") -> str:
+		word_list = []
+		character_list = [';', get_slash(), '|', '-', '"', '&', '$', '@', '+', '^', '_', '<', '[', '!', '=', '>', '(', ')', '}', "'", '`', ']', '#', '%', '?', '*', '{', ',', '~']
+
+		count = 0
+		string = ""
+
+		for character in character_list:
+			text = content.replace(character, " ")
+		for word in text.split(" "):
+			word_list.append(word)
+		for word in word_list:
+			if re.match(REGEX, word):
+				count = count + 1
+				word = "".join([censor for i in range(len(word))])
+
+			string = string + word + " "
+
+		if count == 0:
+			return content
+
+		else:
+			return string
