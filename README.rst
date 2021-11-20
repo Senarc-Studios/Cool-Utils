@@ -75,6 +75,8 @@ Examples
    >> bar
    >> None
 
+`Documentation <https://github.com/Senarc-Studios/Cool-Utils/wiki/Documentation>`_
+
 Collaborators
 -------------
 
