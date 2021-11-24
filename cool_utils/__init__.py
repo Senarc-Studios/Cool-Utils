@@ -38,7 +38,7 @@ __version__ = '1.2.0'
 
 from .compile import Compile
 # from .discord import Discord
-from .json_utils import *
+from .json_utils import JSON
 from .os import *
 from .cache import Cache
 from .links import Links
