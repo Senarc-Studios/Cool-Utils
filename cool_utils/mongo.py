@@ -30,68 +30,51 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
+from motor.motor_asyncio import AsyncIOMotorClient
 from typing import TypeVar
 import itertools
-import json
 
 MISSING = 0.0
 
 __all__ = (
-	'JSON'
+	'Mongo'
 )
 
-T = TypeVar('T', bound='JSON')
+T = TypeVar('T', bound='Mongo')
 
 
-class JSON:
+class Mongo:
 	def __init__(self):
-		self.file = None
+		self.null = None
 
-	def open(self, file: str):
-		self.file = file
+	def connect(self, mongo_url, database):
+		self.client = AsyncIOMotorClient(mongo_url)
+		self.db = self.client[database]
 
-	def get_data(self, variable: str):
-		file = self.file
-		if file == None:
-			raise RuntimeError("File not opened with JSON.open()")
+	def set_collection(self, collection):
+		self.collection = self.db[collection]
 
-		try:
-			with open(f"{file}.json", "r") as jsonFile:
-				data = json.load(jsonFile)
-			return data[variable]
-		except:
-			return None
+	async def insert(self, data):
+		if self.collection == None:
+			raise RuntimeError("Collection not set")
+		return await self.collection.insert_one(data)
 
-	def register_value(self, variable: str, value):
-		file = self.file
-		if file == None:
-			raise RuntimeError("File not opened with JSON.open()")
+	async def find(self, query):
+		if self.collection == None:
+			raise RuntimeError("Collection not set")
+		return self.collection.find(query)
 
-		try:
-			with open(f"{file}.json", "r") as jsonFile:
-				data = json.load(jsonFile)
-		
-			data[variable] = value
-		
-			with open(f"{file}.json", "w") as jsonFile:
-				json.dump(data, jsonFile)
-		
-		except:
-			data = {}
-			data[variable] = value
-		
-			with open(f"{file}.json", "w") as jsonFile:
-				json.dump(data, jsonFile)
+	async def find_one(self, query):
+		if self.collection == None:
+			raise RuntimeError("Collection not set")
+		return await self.collection.find_one(query)
 
-	def format(self, json: dict, indent: int=2):
-		return json.dumps(json, indent=indent)
+	async def update(self, query, data):
+		if self.collection == None:
+			raise RuntimeError("Collection not set")
+		await self.collection.update_one(query, data)
 
-	def build_json(self, *args):
-		data = {}
-		count = 1
-		_count = 0
-		for i in len(args):
-			data.update({args[_count]: args[count]})
-			count += 2
-			_count += 1
-		return data
+	async def delete(self, query):
+		if self.collection == None:
+			raise RuntimeError("Collection not set")
+		await self.collection.delete_one(query)
