@@ -90,7 +90,7 @@ class JSON:
 		data = {}
 		count = 1
 		_count = 0
-		for i in len(args):
+		for i in len(list(args)):
 			data.update({args[_count]: args[count]})
 			count += 2
 			_count += 1
