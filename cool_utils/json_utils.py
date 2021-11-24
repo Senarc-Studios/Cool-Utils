@@ -93,5 +93,5 @@ class JSON:
 		for i in range(len(list(args))):
 			data.update({args[_count]: args[count]})
 			count += 1
-			_count, count += 1
+			_count += 1
 		return data
