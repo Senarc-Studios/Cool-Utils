@@ -83,8 +83,8 @@ class JSON:
 			with open(f"{file}.json", "w") as jsonFile:
 				json.dump(data, jsonFile)
 
-	def format(json: dict, indent: int=2):
-		return json.dumps(json, indent=indent)
+	def format(json: dict, indent: int=2, *args):
+		return json.dumps(json, *args, indent=indent)
 
 	def build_json(*args):
 		data = {}
