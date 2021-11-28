@@ -70,9 +70,10 @@ Examples
 
    import cool_utils
 
-   utils.register_value(file="sample", variable="foo", value="bar") # This creates a JSON file.
-   data = utils.get_data(file="sample", variable="foo")
-   invalid_data = utils.get_data("sample", "non-existant value") # You can do this instead of doing the variable's name.
+   utils.JSON.open("sample")
+   utils.JSON.register_value(variable="foo", value="bar") # This creates a JSON file.
+   data = utils.JSON.get_data(variable="foo")
+   invalid_data = utils.get_data("non-existant value") # You can do this instead of doing the variable's name.
    print(data)
    print(invalid_data)
    >> bar
