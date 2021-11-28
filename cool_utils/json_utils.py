@@ -47,11 +47,11 @@ class JSON:
 	def __init__(self):
 		self.file = None
 
-	def open(self, file: str):
-		self.file = file
+	def open(file: str):
+		JSON.file = file
 
-	def get_data(self, variable: str):
-		file = self.file
+	def get_data(variable: str):
+		file = JSON.file
 		if file == None:
 			raise RuntimeError("File not opened with JSON.open()")
 
@@ -62,8 +62,8 @@ class JSON:
 		except:
 			return None
 
-	def register_value(self, variable: str, value):
-		file = self.file
+	def register_value(variable: str, value):
+		file = JSON.file
 		if file == None:
 			raise RuntimeError("File not opened with JSON.open()")
 
@@ -86,7 +86,7 @@ class JSON:
 	def format(json: dict, indent: int=2):
 		return json.dumps(json, indent=indent)
 
-	def build_json(*args, debug=False):
+	def build_json(*args):
 		data = {}
 		count = 1
 		_count = 0

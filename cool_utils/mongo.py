@@ -46,35 +46,38 @@ T = TypeVar('T', bound='Mongo')
 class Mongo:
 	def __init__(self):
 		self.null = None
+		self.client = None
+		self.db = None
+		self.collection = None
 
-	def connect(self, mongo_url, database):
-		self.client = AsyncIOMotorClient(mongo_url)
-		self.db = self.client[database]
+	def connect(mongo_url, database):
+	 Mongo.client = AsyncIOMotorClient(mongo_url)
+	 Mongo.db = Mongo.client[database]
 
-	def set_collection(self, collection):
-		self.collection = self.db[collection]
+	def set_collection(collection):
+	 Mongo.collection = Mongo.db[collection]
 
-	async def insert(self, data):
-		if self.collection == None:
+	async def insert(data):
+		if Mongo.collection == None:
 			raise RuntimeError("Collection not set")
-		return await self.collection.insert_one(data)
+		return await Mongo.collection.insert_one(data)
 
-	async def find(self, query):
-		if self.collection == None:
+	async def find(query):
+		if Mongo.collection == None:
 			raise RuntimeError("Collection not set")
-		return self.collection.find(query)
+		return Mongo.collection.find(query)
 
-	async def find_one(self, query):
-		if self.collection == None:
+	async def find_one(query):
+		if Mongo.collection == None:
 			raise RuntimeError("Collection not set")
-		return await self.collection.find_one(query)
+		return await Mongo.collection.find_one(query)
 
-	async def update(self, query, data):
-		if self.collection == None:
+	async def update(query, data):
+		if Mongo.collection == None:
 			raise RuntimeError("Collection not set")
-		await self.collection.update_one(query, data)
+		await Mongo.collection.update_one(query, data)
 
-	async def delete(self, query):
-		if self.collection == None:
+	async def delete(query):
+		if Mongo.collection == None:
 			raise RuntimeError("Collection not set")
-		await self.collection.delete_one(query)
+		await Mongo.collection.delete_one(query)
