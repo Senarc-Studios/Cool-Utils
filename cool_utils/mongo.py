@@ -62,7 +62,7 @@ class Mongo:
 			raise RuntimeError("Collection not set")
 		return await Mongo.collection.insert_one(data)
 
-	async def find(query):
+	def find(query):
 		if Mongo.collection == None:
 			raise RuntimeError("Collection not set")
 		return Mongo.collection.find(query)
