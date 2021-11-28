@@ -93,7 +93,10 @@ class JSON:
 		for i in range(len(list(args))):
 			if count > len(list(args)):
 				break
-			data.update({args[_count]: args[count]})
+			try:
+				data.update({args[_count]: args[count]})
+			except:
+				return data
 			count += 1
 			_count += 1
 		return data
