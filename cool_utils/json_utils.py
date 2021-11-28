@@ -86,7 +86,7 @@ class JSON:
 	def format(self, json: dict, indent: int=2):
 		return json.dumps(json, indent=indent)
 
-	def build_json(self, debug=False, *args):
+	def build_json(self,  *args, debug=False):
 		data = {}
 		count = 1
 		_count = 0
