@@ -97,6 +97,6 @@ class JSON:
 				data.update({args[_count]: args[count]})
 			except:
 				return data
-			count += 1
-			_count += 1
+			count += 2
+			_count += 2
 		return data
