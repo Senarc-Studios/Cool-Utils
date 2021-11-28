@@ -91,10 +91,10 @@ class JSON:
 		count = 1
 		_count = 0
 		for i in range(len(list(args))):
-			if debug:
-				print(f"{i}: Adding {args[_count]} with {args[count]}")
 			if count > len(list(args)):
 				break
+			if debug:
+				print(f"{i}: Adding {args[_count]} with {args[count]}")
 			try:
 				data.update({args[_count]: args[count]})
 			except:
