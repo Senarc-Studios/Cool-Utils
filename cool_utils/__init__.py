@@ -34,7 +34,7 @@ __title__ = 'cool-utils'
 __author__ = 'BenitzCoding'
 __license__ = 'BSD'
 __copyright__ = 'Copyright 2021-present BenitzCoding'
-__version__ = '1.2.0.1'
+__version__ = '1.2.0.2'
 
 from .compile import Compile
 # from .discord import Discord
@@ -42,3 +42,4 @@ from .json_utils import JSON
 from .os import *
 from .cache import Cache
 from .links import Links
+from .mongo import Mongo
