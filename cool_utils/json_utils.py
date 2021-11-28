@@ -83,10 +83,10 @@ class JSON:
 			with open(f"{file}.json", "w") as jsonFile:
 				json.dump(data, jsonFile)
 
-	def format(self, json: dict, indent: int=2):
+	def format(json: dict, indent: int=2):
 		return json.dumps(json, indent=indent)
 
-	def build_json(self,  *args, debug=False):
+	def build_json(*args, debug=False):
 		data = {}
 		count = 1
 		_count = 0
