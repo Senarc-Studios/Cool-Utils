@@ -86,11 +86,13 @@ class JSON:
 	def format(self, json: dict, indent: int=2):
 		return json.dumps(json, indent=indent)
 
-	def build_json(self, *args):
+	def build_json(self, debug=False, *args):
 		data = {}
 		count = 1
 		_count = 0
 		for i in range(len(list(args))):
+			if debug:
+				print(f"{i}: Adding {args[_count]} with {args[count]}")
 			if count > len(list(args)):
 				break
 			try:
