@@ -94,8 +94,6 @@ class JSON:
 			if count > len(list(args)):
 				break
 			try:
-				if debug:
-					print(f"{i}: Adding {args[_count]} with {args[count]}")
 				data.update({args[_count]: args[count]})
 			except:
 				return data
