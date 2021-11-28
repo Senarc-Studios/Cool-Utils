@@ -91,6 +91,8 @@ class JSON:
 		count = 1
 		_count = 0
 		for i in range(len(list(args))):
+			if count > len(list(args)):
+				break
 			data.update({args[_count]: args[count]})
 			count += 1
 			_count += 1
