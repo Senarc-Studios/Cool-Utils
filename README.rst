@@ -70,8 +70,8 @@ Examples
 
    import cool_utils
 
-   utils.JSON.open("sample")
-   utils.JSON.register_value(variable="foo", value="bar") # This creates a JSON file.
+   cool_utils.JSON.open("sample")
+   cool_utils.JSON.register_value(variable="foo", value="bar") # This creates a JSON file.
    data = utils.JSON.get_data(variable="foo")
    invalid_data = utils.JSON.get_data("non-existant value") # You can do this instead of doing the variable's name.
    print(data)
