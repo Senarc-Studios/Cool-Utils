@@ -44,11 +44,10 @@ T = TypeVar('T', bound='Mongo')
 
 
 class Mongo:
-	def __init__(self):
-		self.null = None
-		self.client = None
-		self.db = None
-		self.collection = None
+	null = None
+	client = None
+	db = None
+	collection = None
 
 	def connect(mongo_url, database):
 	 Mongo.client = AsyncIOMotorClient(mongo_url)
