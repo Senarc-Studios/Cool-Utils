@@ -115,21 +115,21 @@ class Terminal:
 		time = datetime.now()
 		if Terminal.log == True:
 			file = open(f"{Terminal.log_file}.log", "a")
-			file.write(time.strftime(f"[{Terminal.format}] INFO: ") + content + "\n")
+			file.write(time.strftime(f"[{Terminal.format}] INFO: ") + f"{content}" + "\n")
 		print(chalk.bold(chalk.white(time.strftime(f"[{Terminal.format}] INFO: "))) + chalk.whiteBright(f"{content}"))
 
 	def warn(content):
 		time = datetime.now()
 		if Terminal.log == True:
 			file = open(f"{Terminal.log_file}.log", "a")
-			file.write(time.strftime(f"[{Terminal.format}] WARNING: ") + content + "\n")
+			file.write(time.strftime(f"[{Terminal.format}] WARNING: ") + f"{content}" + "\n")
 		print(chalk.bold(chalk.yellow(time.strftime(f"[{Terminal.format}] WARNING: "))) + chalk.yellowBright(f"{content}"))
 
 	def error(content):
 		time = datetime.now()
 		if Terminal.log == True:
 			file = open(f"{Terminal.log_file}.log", "a")
-			file.write(time.strftime(f"[{Terminal.format}] ERROR: ") + content + "\n")
+			file.write(time.strftime(f"[{Terminal.format}] ERROR: ") + f"{content}" + "\n")
 		print(chalk.bold(chalk.red(time.strftime(f"[{Terminal.format}] ERROR: "))) + chalk.redBright(f"{content}"))
 
 	def clear():
