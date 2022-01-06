@@ -31,7 +31,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 import os
 import sys
-from dotenv import find_dotenv, load_dotenv
 from simple_chalk import chalk
 from datetime import datetime, tzinfo
 from typing import TypeVar
@@ -41,17 +40,6 @@ __all__ = (
 )
 
 T = TypeVar('T', bound='Terminal')
-
-def get_env(variable: str):
-	try:
-		load_dotenv(find_dotenv())
-		value = os.getenv[f"{variable}"]
-		if value != "":
-			return value
-		else:
-			return None
-	except:
-		return None
 
 def get_command(command: str):
 	PYTHON = {
