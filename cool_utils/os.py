@@ -97,6 +97,7 @@ class Terminal:
 	format = "%H:%M:%S"
 	log = False
 	log_file = None
+	error_func = None
 
 	def set_format(format: str):
 		Terminal.format = format
@@ -131,6 +132,12 @@ class Terminal:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] ERROR: ") + f"{content}" + "\n")
 		print(chalk.bold(chalk.red(time.strftime(f"[{Terminal.format}] ERROR: "))) + chalk.redBright(f"{content}"))
+		if Terminal.error_func != None:
+			return Terminal.error_func
+
+	def on_error(function: function) -> None:
+		Terminal.error_func = function
+		return None
 
 	def clear():
 		os.system(get_command("clear"))
