@@ -94,7 +94,7 @@ def get_command(command: str):
 		return command
 
 class Terminal:
-	format = "%H:%M:%S"
+	format = "%d-%m-%Y | %H:%M:%S"
 	log = False
 	log_file = None
 	error_func = None
