@@ -31,7 +31,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 from typing import TypeVar
-import itertools
 import json
 
 MISSING = 0.0
@@ -84,7 +83,7 @@ class JSON:
 				json.dump(data, jsonFile)
 
 	def format(json: dict, indent: int=2, *args):
-		return json.dumps(json, *args, indent=indent)
+		return json.dumps(json, indent=indent, *args)
 
 	def build(*args):
 		data = {}
