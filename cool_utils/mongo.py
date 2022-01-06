@@ -50,11 +50,11 @@ class Mongo:
 	collection = None
 
 	def connect(mongo_url, database):
-	 Mongo.client = AsyncIOMotorClient(mongo_url)
-	 Mongo.db = Mongo.client[database]
+		Mongo.client = AsyncIOMotorClient(mongo_url)
+		Mongo.db = Mongo.client[database]
 
 	def set_collection(collection):
-	 Mongo.collection = Mongo.db[collection]
+		Mongo.collection = Mongo.db[collection]
 
 	async def insert(data):
 		if Mongo.collection == None:
