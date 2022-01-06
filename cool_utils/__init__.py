@@ -34,10 +34,9 @@ __title__ = 'cool-utils'
 __author__ = 'BenitzCoding'
 __license__ = 'BSD'
 __copyright__ = 'Copyright 2021-present BenitzCoding'
-__version__ = '1.2.1.0.6'
+__version__ = '1.2.1.0.7'
 
 from .compile import Compile
-# from .discord import Discord
 from .json_utils import JSON
 from .os import Terminal, get_command
 from .cache import Cache
