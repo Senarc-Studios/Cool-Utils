@@ -65,20 +65,18 @@ def get_command(command: str):
 		'win32': 'dir',
 		'macos': 'ls'
 	}
-	command = command.lower()
-	if command == "python":
-		return PYTHON[sys.platform]
 
-	elif command == "pip":
-		return PIP[sys.platform]
+	OPTION = {
+		"python": PYTHON,
+		"pip": PIP,
+		"clear": CLEAR,
+		"ls": LS
+	}
 
-	elif command == "clear":
-		return CLEAR[sys.platform]
-
-	elif command == "ls":
-		return LS[sys.platform]
-
-	else:
+	command_lower = command.lower()
+	try:
+		return OPTION[command_lower][sys.platform]
+	except:
 		return command
 
 class Terminal:

@@ -2,8 +2,8 @@ from setuptools import setup
 
 requirements = []
 README = ""
-# Please don't change the indentation.
-with open("requirements.txt") as f:# I gave you access!
+
+with open("requirements.txt") as f:
 	requirements = f.read().splitlines()
 
 with open("README.rst") as f:
@@ -23,7 +23,7 @@ setup(
 		"Issue tracker": "https://github.com/Senarc-Studios/Cool-Utils/issues",
 		"Github": "https://github.com/Senarc-Studios/Cool-Utils/tree/Development"
 	},
-	version="1.2.1.0.5",
+	version="1.2.1.0.6",
 	packages=packages,
 	license="BSD",
 	description="This is Cool Utility tools that you can use in python.",
