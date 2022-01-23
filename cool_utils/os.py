@@ -119,9 +119,9 @@ class Terminal:
 			file.write(time.strftime(f"[{Terminal.format}] ERROR: ") + f"{content}" + "\n")
 		print(chalk.bold(chalk.red(time.strftime(f"[{Terminal.format}] ERROR: "))) + chalk.redBright(f"{content}"))
 		if Terminal.error_func != None:
-			return Terminal.error_func
+			return Terminal.error_func()
 
-	def on_error(function: function) -> None:
+	def on_error(function) -> None:
 		Terminal.error_func = function
 		return None
 
