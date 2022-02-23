@@ -42,3 +42,4 @@ from .os import Terminal, get_command
 from .cache import Cache
 from .links import Links
 from .mongo import Mongo
+from .classes import *
