@@ -30,7 +30,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from typing import TypeVar
+from typing import TypeVar, Any
 import json
 
 MISSING = 0.0
@@ -46,10 +46,13 @@ class JSON:
 	def __init__(self):
 		self.file = None
 
-	def open(file: str):
+	def open(file: str) -> None:
+		if file.endswith(".json"):
+			file = file[:-5]
 		JSON.file = file
+		return None
 
-	def get_data(variable: str):
+	def get_data(variable) -> Any:
 		file = JSON.file
 		if file == None:
 			raise RuntimeError("File not opened with JSON.open()")
@@ -61,7 +64,7 @@ class JSON:
 		except:
 			return None
 
-	def register_value(variable: str, value):
+	def register_value(variable, value) -> None:
 		file = JSON.file
 		if file == None:
 			raise RuntimeError("File not opened with JSON.open()")
@@ -82,10 +85,10 @@ class JSON:
 			with open(f"{file}.json", "w") as jsonFile:
 				json.dump(data, jsonFile)
 
-	def format(json: dict, indent: int=2, *args):
+	def format(json: dict, indent: int=2, *args) -> dict:
 		return json.dumps(json, indent=indent, *args)
 
-	def build(*args):
+	def build(*args) -> dict:
 		data = {}
 		count = 1
 		_count = 0
