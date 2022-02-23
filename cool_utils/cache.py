@@ -30,7 +30,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from typing import TypeVar
+from typing import TypeVar, Any
 
 cache = {
 	"size": 0
@@ -43,24 +43,24 @@ __all__ = (
 T = TypeVar('T', bound='Cache')
 
 class Cache:
-	def store( variable: str, value ):
+	def store(variable: str, value) -> None:
 		payload = {
 			"size": (1 + cache["size"]),
 			f"{variable}": value
 		}
 		cache.update(payload)
-		return
+		return None
 
-	def load( variable: str ):
+	def load(variable) -> Any:
 		try:
 			return cache[variable]
 		except:
 			return None
 
-	def size():
+	def size() -> int:
 		return cache["size"]
 
-	def clear():
+	def clear() -> None:
 		key_list = []
 		for key, value in cache.items():
 			if key == "size":
@@ -75,9 +75,9 @@ class Cache:
 		}
 
 		cache.update(default_payload)
-		return
+		return None
 
-	def remove( variable: str ):
+	def remove(variable) -> bool:
 		try:
 			del cache[variable]
 			return True
