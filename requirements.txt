@@ -1,3 +1,2 @@
-fusion.py
 motor
 simple-chalk
