@@ -79,6 +79,12 @@ def get_command(command: str):
 	except:
 		return command
 
+BOLD = "\033[1m"
+FAIL = "\033[91m"
+WARNING = "\033[93m"
+WHITE = "\33[97m"
+RESET = "\033[0m"
+
 class Terminal:
 	format = "%d-%m-%Y | %H:%M:%S"
 	log = False
@@ -103,21 +109,21 @@ class Terminal:
 		if Terminal.log == True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] INFO: ") + f"{content}" + "\n")
-		print(chalk.bold(chalk.white(time.strftime(f"[{Terminal.format}] INFO: "))) + chalk.whiteBright(f"{content}"))
+		print(BOLD + WHITE + time.strftime(f"[{Terminal.format}] INFO: ") + RESET + WHITE + f"{content}")
 
 	def warn(content):
 		time = datetime.now()
 		if Terminal.log == True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] WARNING: ") + f"{content}" + "\n")
-		print(chalk.bold(chalk.yellow(time.strftime(f"[{Terminal.format}] WARNING: "))) + chalk.yellowBright(f"{content}"))
+		print(BOLD + WARNING + time.strftime(f"[{Terminal.format}] WARNING: ") + RESET + WARNING + f"{content}")
 
 	def error(content):
 		time = datetime.now()
 		if Terminal.log == True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] ERROR: ") + f"{content}" + "\n")
-		print(chalk.bold(chalk.red(time.strftime(f"[{Terminal.format}] ERROR: "))) + chalk.redBright(f"{content}"))
+		print(BOLD + FAIL + time.strftime(f"[{Terminal.format}] ERROR: ") + RESET + FAIL + f"{content}")
 		if Terminal.error_func != None:
 			return Terminal.error_func()
 
