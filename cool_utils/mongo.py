@@ -32,9 +32,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from motor.motor_asyncio import AsyncIOMotorClient
 from typing import TypeVar
-import itertools
-
-MISSING = 0.0
 
 __all__ = (
 	'Mongo'
