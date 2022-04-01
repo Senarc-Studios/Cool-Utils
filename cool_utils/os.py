@@ -31,7 +31,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 import os
 import sys
-from simple_chalk import chalk
 from datetime import datetime, tzinfo
 from typing import TypeVar
 
