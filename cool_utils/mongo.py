@@ -29,6 +29,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
+import asyncio
 
 from motor.motor_asyncio import AsyncIOMotorClient
 from typing import TypeVar
@@ -41,39 +42,32 @@ T = TypeVar('T', bound='Mongo')
 
 
 class Mongo:
-	null = None
-	client = None
-	db = None
-	collection = None
+	def __init__(self, mongo_url, database):
+		cluster = AsyncIOMotorClient(mongo_url)
+		cluster.get_io_loop = asyncio.get_running_loop
+		self.client = cluster
+		self.db = self.client[database]
 
-	def connect(mongo_url, database):
-		Mongo.client = AsyncIOMotorClient(mongo_url)
-		Mongo.db = Mongo.client[database]
+	@classmethod
+	async def collection(self, name: str):
+		return self.db[name]
 
-	def set_collection(collection):
-		Mongo.collection = Mongo.db[collection]
+	@classmethod
+	async def insert(self, collection, data):
+		return await collection.insert_one(data)
 
-	async def insert(data):
-		if Mongo.collection == None:
-			raise RuntimeError("Collection not set")
-		return await Mongo.collection.insert_one(data)
+	@classmethod
+	def find(self, collection, query):
+		return collection.find(query)
 
-	def find(query):
-		if Mongo.collection == None:
-			raise RuntimeError("Collection not set")
-		return Mongo.collection.find(query)
+	@classmethod
+	async def find_one(self, collection, query):
+		return await collection.find_one(query)
 
-	async def find_one(query):
-		if Mongo.collection == None:
-			raise RuntimeError("Collection not set")
-		return await Mongo.collection.find_one(query)
+	@classmethod
+	async def update(self, collection, query, data):
+		return await collection.update_one(query, data)
 
-	async def update(query, data):
-		if Mongo.collection == None:
-			raise RuntimeError("Collection not set")
-		await Mongo.collection.update_one(query, data)
-
-	async def delete(query):
-		if Mongo.collection == None:
-			raise RuntimeError("Collection not set")
-		await Mongo.collection.delete_one(query)
+	@classmethod
+	async def delete(self, collection, query):
+		return await collection.delete_one(query)
