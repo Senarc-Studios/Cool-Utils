@@ -101,6 +101,7 @@ This wouldn’t be made possible without these people
 1. `BenitzCoding <https://github.com/BenitzCoding>`__
 2. `JDJG Inc. Official <https://github.com/JDJGInc>`__
 3. `P3ter <https://github.com/darkp3ter>`__
+4. `Proguy <https://github.com/proguy914629bot>`__
 
 .. |Discord| image:: https://discord.com/api/guilds/886543799843688498/embed.png
    :target: https://discord.gg/5YY3W83YWg
