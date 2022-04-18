@@ -34,7 +34,7 @@ __title__ = 'cool-utils'
 __author__ = 'BenitzCoding'
 __license__ = 'BSD'
 __copyright__ = 'Copyright 2021-present BenitzCoding'
-__version__ = '1.2.2'
+__version__ = '1.3.0'
 
 from .compile import Compile
 from .json_utils import JSON, GlobalJSON
