@@ -59,8 +59,8 @@ Examples
 
    strings = ["This", "Is", "A", "String"]
    num_list = [9, 4, 2]
-   print(Compile.string(strings, startwith="Hey, ", endwith=".", joints=" "))
-   print(Compile.numbers(num_list, startwith=6, endwith=0))
+   print(Compile.string(strings, startswith="Hey, ", endswith=".", joints=" "))
+   print(Compile.numbers(num_list, startswith=6, endswith=0))
    >> Hey, This Is A String.
    >> 69420
 
