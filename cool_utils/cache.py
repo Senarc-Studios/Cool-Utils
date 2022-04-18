@@ -52,7 +52,7 @@ class GlobalCache:
 			raise ValueError("Cannot store _size")
 
 		payload = {
-			"_size": (1 + _cache["size"]),
+			"_size": (1 + _cache["_size"]),
 			f"{variable}": value
 		}
 		_cache.update(payload)
@@ -117,14 +117,14 @@ class GlobalCache:
 
 class Cache:
 	def __init__(self):
-		self._cache = None
+		self._cache = {"_size": 0}
 
 	def store(self, variable: str, value: Any) -> None:
 		if variable == "_size":
 			raise ValueError("Cannot store _size")
 
 		payload = {
-			"_size": (1 + self._cache["size"]),
+			"_size": (1 + self._cache["_size"]),
 			f"{variable}": value
 		}
 		self._cache.update(payload)
