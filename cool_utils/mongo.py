@@ -48,26 +48,25 @@ class Mongo:
 		self.client = cluster
 		self.db = self.client[database]
 
-	@classmethod
 	async def collection(self, name: str):
 		return self.db[name]
 
-	@classmethod
-	async def insert(self, collection, data):
+	@staticmethod
+	async def insert(collection, data):
 		return await collection.insert_one(data)
 
-	@classmethod
-	def find(self, collection, query):
+	@staticmethod
+	def find(collection, query):
 		return collection.find(query)
 
-	@classmethod
-	async def find_one(self, collection, query):
+	@staticmethod
+	async def find_one(collection, query):
 		return await collection.find_one(query)
 
-	@classmethod
-	async def update(self, collection, query, data):
+	@staticmethod
+	async def update(collection, query, data):
 		return await collection.update_one(query, data)
 
-	@classmethod
-	async def delete(self, collection, query):
+	@staticmethod
+	async def delete(collection, query):
 		return await collection.delete_one(query)

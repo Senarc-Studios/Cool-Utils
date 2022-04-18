@@ -30,10 +30,12 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from typing import TypeVar, Any
+from typing import TypeVar, Any, Optional, overload
 
-cache = {
-	"size": 0
+from ._missing import MISSING
+
+_cache = {
+	"_size": 0,  # linter = bad
 }
 
 __all__ = (
@@ -42,44 +44,138 @@ __all__ = (
 
 T = TypeVar('T', bound='Cache')
 
-class Cache:
-	def store(variable: str, value) -> None:
+
+class GlobalCache:
+	@staticmethod
+	def store(variable: str, value: Any) -> None:
+		if variable == "_size":
+			raise ValueError("Cannot store _size")
+
 		payload = {
-			"size": (1 + cache["size"]),
+			"_size": (1 + _cache["size"]),
 			f"{variable}": value
 		}
-		cache.update(payload)
+		_cache.update(payload)
 		return None
 
-	def load(variable) -> Any:
+	@staticmethod
+	@overload
+	def load(variable: str) -> Any:
+		...
+
+	@staticmethod
+	@overload
+	def load(variable: str, default: Optional[Any] = MISSING) -> Any:
+		...
+
+	@staticmethod
+	def load(variable: Optional[Any] = MISSING, default: Optional[Any] = MISSING) -> Any:
+		if variable is MISSING:
+			c = _cache.copy()
+			del c["_size"]
+			return c
+
+		if variable == "_size":
+			raise ValueError("Cannot load _size")
+
 		try:
-			return cache[variable]
-		except:
-			return None
+			return _cache[variable]
+		except KeyError:
+			if default is MISSING:
+				raise
 
+			return default
+
+	@staticmethod
 	def size() -> int:
-		return cache["size"]
+		return _cache["_size"]
 
+	@staticmethod
 	def clear() -> None:
 		key_list = []
-		for key, value in cache.items():
-			if key == "size":
+		for key, value in _cache.items():
+			if key == "_size":
 				continue
 			key_list.append(key)
-		
+
 		for key in key_list:
-			del cache[key]
+			del _cache[key]
 
 		default_payload = {
-			"size": 0
+			"_size": 0
 		}
 
-		cache.update(default_payload)
+		_cache.update(default_payload)
+
+	@staticmethod
+	def remove(variable: Any) -> Any:
+		if variable == "_size":
+			raise ValueError("Cannot remove _size")
+
+		return _cache.pop(variable)
+
+
+class Cache:
+	def __init__(self):
+		self._cache = None
+
+	def store(self, variable: str, value: Any) -> None:
+		if variable == "_size":
+			raise ValueError("Cannot store _size")
+
+		payload = {
+			"_size": (1 + self._cache["size"]),
+			f"{variable}": value
+		}
+		self._cache.update(payload)
 		return None
 
-	def remove(variable) -> bool:
+	@overload
+	def load(self, variable: str) -> Any:
+		...
+
+	@overload
+	def load(self, variable: str, default: Optional[Any] = MISSING) -> Any:
+		...
+
+	def load(self, variable: Optional[Any] = MISSING, default: Optional[Any] = MISSING) -> Any:
+		if variable is MISSING:
+			c = self._cache.copy()
+			del c["_size"]
+			return c
+
+		if variable == "_size":
+			raise ValueError("Cannot load _size")
+
 		try:
-			del cache[variable]
-			return True
-		except:
-			return False
+			return self._cache[variable]
+		except KeyError:
+			if default is MISSING:
+				raise
+
+			return default
+
+	def size(self) -> int:
+		return self._cache["_size"]
+
+	def clear(self) -> None:
+		key_list = []
+		for key, value in self._cache.items():
+			if key == "_size":
+				continue
+			key_list.append(key)
+
+		for key in key_list:
+			del self._cache[key]
+
+		default_payload = {
+			"_size": 0
+		}
+
+		self._cache.update(default_payload)
+
+	def remove(self, variable: Any) -> Any:
+		if variable == "_size":
+			raise ValueError("Cannot remove _size")
+
+		return self._cache.pop(variable)
