@@ -114,7 +114,7 @@ class Terminal:
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] INFO: ") + f"{content}" + "\n")
-		print(BOLD + WHITE + time.strftime(f"[{Terminal.format}] INFO: ") + RESET + WHITE + f"{content}")
+		print(BOLD + WHITE + time.strftime(f"[{Terminal.format}] INFO: ") + RESET + WHITE + f"{content}" + RESET)
 
 	@staticmethod
 	def warn(content):
@@ -122,7 +122,7 @@ class Terminal:
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] WARNING: ") + f"{content}" + "\n")
-		print(BOLD + WARNING + time.strftime(f"[{Terminal.format}] WARNING: ") + RESET + WARNING + f"{content}")
+		print(BOLD + WARNING + time.strftime(f"[{Terminal.format}] WARNING: ") + RESET + WARNING + f"{content}" + RESET)
 
 	@staticmethod
 	def error(content):
@@ -130,7 +130,7 @@ class Terminal:
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] ERROR: ") + f"{content}" + "\n")
-		print(BOLD + FAIL + time.strftime(f"[{Terminal.format}] ERROR: ") + RESET + FAIL + f"{content}")
+		print(BOLD + FAIL + time.strftime(f"[{Terminal.format}] ERROR: ") + RESET + FAIL + f"{content}" + RESET)
 		if Terminal.error_func is not None:
 			return Terminal.error_func()
 
