@@ -82,6 +82,7 @@ Examples
 **GlobalJSON:**
 
 .. code:: python
+
     import cool_utils
 
     cool_utils.GlobalJSON.open("sample")
