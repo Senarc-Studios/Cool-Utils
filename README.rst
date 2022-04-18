@@ -59,8 +59,8 @@ Examples
 
    strings = ["This", "Is", "A", "String"]
    num_list = [9, 4, 2]
-   print(Compile.string(strings, startwith="Hey, ", endwith=".", joints=" "))
-   print(Compile.numbers(num_list, startwith=6, endwith=0))
+   print(Compile.string(strings, startswith="Hey, ", endswith=".", joints=" "))
+   print(Compile.numbers(num_list, startswith=6, endswith=0))
    >> Hey, This Is A String.
    >> 69420
 
@@ -70,14 +70,28 @@ Examples
 
    import cool_utils
 
-   cool_utils.JSON.open("sample")
-   cool_utils.JSON.register_value(variable="foo", value="bar") # This creates a JSON file.
-   data = utils.JSON.get_data(variable="foo")
-   invalid_data = utils.JSON.get_data("non-existant value") # You can do this instead of doing the variable's name.
+   json = cool_utils.JSON.open("sample")
+   json.register_value(variable="foo", value="bar") # This creates a JSON file.
+   data = json.get_data(variable="foo")
+   invalid_data = json.get_data("non-existant value") # You can do this instead of doing the variable's name.
    print(data)
    print(invalid_data)
    >> bar
    >> None
+
+**GlobalJSON:**
+
+.. code:: python
+    import cool_utils
+
+    cool_utils.GlobalJSON.open("sample")
+    cool_utils.GlobalJSON.register_value(variable="foo", value="bar")
+    data = cool_utils.GlobalJSON.get_data(variable="foo")
+    invalid_data = cool_utils.GlobalJSON.get_data("non-existant value")
+    print(data)
+    print(invalid_data)
+    >> bar
+    >> None
 
 Collaborators
 -------------

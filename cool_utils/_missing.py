@@ -30,47 +30,21 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from typing import Any, TypeVar
-
-__all__ = (
-	'Array'
-)
-
-T = TypeVar('T', bound='Array')
+from typing import Any
 
 
-class Array:
-	def __init__(self, type: Any, size: int):
-		self.type = type
-		self.size = size
-		self.list = []
+class _Missing:
+	def __eq__(self, other):
+		return isinstance(other, _Missing)
 
-	def append(self, value: Any) -> None:
-		if type(self.list[0]) == type(value) and len(self.list) == self.size:
-			self.list.append(value)
+	def __bool__(self):
+		return False
 
-		else:
-			raise TypeError("Array type mismatch")
+	def __hash__(self):
+		return 0
 
-		if len(self.list) == self.size:
-			raise RuntimeError("Array has reached it's limit.")
+	def __repr__(self):
+		return '<Missing>'
 
-		self.list.append(value)
-		return None
 
-	def remove(self, index: int) -> None:
-		self.list.remove(self.list[index])
-		return None
-
-	def get(self, index: int) -> Any:
-		return self.list[index]
-
-	def size(self) -> int:
-		return len(self.list)
-
-	def clear(self) -> None:
-		self.list = []
-		return None
-
-	def size_left(self) -> int:
-		return self.size - len(self.list)
+MISSING: Any = _Missing()

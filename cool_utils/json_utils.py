@@ -30,75 +30,213 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from typing import TypeVar, Any
 import json
+from typing import TypeVar, Any, Optional, Union, overload
 
-MISSING = 0.0
+from ._missing import MISSING
 
 __all__ = (
-	'JSON'
+    'JSON'
 )
 
 T = TypeVar('T', bound='JSON')
-
+G = TypeVar('G', bound='GlobalJSON')
 
 class JSON:
-	def __init__(self):
-		self.file = None
+    def __init__(self, file: str, *, indent: Optional[Union[int, str]] = None) -> None:
+        self.file = file
+        self.indent = indent
 
-	def open(file: str) -> None:
-		if file.endswith(".json"):
-			file = file[:-5]
-		JSON.file = file
-		return None
+    @classmethod
+    def open(cls, file: str) -> T:
+        if file.endswith(".json"):
+            file = file[:-5]
 
-	def get_data(variable) -> Any:
-		file = JSON.file
-		if file == None:
-			raise RuntimeError("File not opened with JSON.open()")
+        return cls(file)
 
-		try:
-			with open(f"{file}.json", "r") as jsonFile:
-				data = json.load(jsonFile)
-			return data[variable]
-		except:
-			return None
+    @staticmethod
+    def format(data: Any, indent: int = 2, **kwargs) -> str:
+        return json.dumps(data, indent=indent, **kwargs)
 
-	def register_value(variable, value) -> None:
-		file = JSON.file
-		if file == None:
-			raise RuntimeError("File not opened with JSON.open()")
+    @staticmethod
+    def build(*args) -> dict:
+        data = {}
+        count = 1
+        _count = 0
 
-		try:
-			with open(f"{file}.json", "r") as jsonFile:
-				data = json.load(jsonFile)
-		
-			data[variable] = value
-		
-			with open(f"{file}.json", "w") as jsonFile:
-				json.dump(data, jsonFile)
-		
-		except:
-			data = {}
-			data[variable] = value
-		
-			with open(f"{file}.json", "w") as jsonFile:
-				json.dump(data, jsonFile)
+        for i in range(len(list(args))):
+            if count > len(list(args)):
+                break
+            try:
+                data.update({args[_count]: args[count]})
+            except:
+                return data
 
-	def format(json: dict, indent: int=2, *args) -> dict:
-		return json.dumps(json, indent=indent, *args)
+            count += 2
+            _count += 2
 
-	def build(*args) -> dict:
-		data = {}
-		count = 1
-		_count = 0
-		for i in range(len(list(args))):
-			if count > len(list(args)):
-				break
-			try:
-				data.update({args[_count]: args[count]})
-			except:
-				return data
-			count += 2
-			_count += 2
-		return data
+        return data
+
+    def _check_file(self) -> str:
+        file = self.file
+        if file is None:
+            raise RuntimeError("File not opened with JSON.open()")
+
+        return file
+
+    def load(self) -> Any:
+        file = self._check_file()
+
+        try:
+            with open(f"{file}.json", "r") as jsonFile:
+                return json.load(jsonFile)
+        except:
+            return None
+
+    @overload
+    def write(self, data: Any, **kwargs) -> None:
+        ...
+
+    @overload
+    def write(self, data: Any, indent: Optional[Union[int, str]], **kwargs) -> None:
+        ...
+
+    def write(self, data: Any, indent: int = MISSING, **kwargs) -> None:
+        file = self._check_file()
+
+        if indent is MISSING:
+            indent = self.indent
+
+        try:
+            with open(f"{file}.json", "w") as jsonFile:
+                json.dump(data, jsonFile, indent=indent, **kwargs)
+        except:
+            return
+
+    def get_data(self, variable) -> Any:
+        file = self._check_file()
+
+        try:
+            data = self.load()
+            return data[variable]
+        except:
+            return None
+
+    def register_value(self, variable, value) -> None:
+        file = self._check_file()
+
+        try:
+            data = self.load()
+
+            data[variable] = value
+
+            self.write(data)
+        except:
+            data = {}
+            data[variable] = value
+
+            with open(f"{file}.json", "w") as jsonFile:
+                json.dump(data, jsonFile)
+
+
+class GlobalJSON:
+    file: str = None
+    indent: Optional[Union[int, str]] = None
+
+    @staticmethod
+    def open(file: str) -> None:
+        if file.endswith(".json"):
+            file = file[:-5]
+
+        GlobalJSON.file = file
+
+    @staticmethod
+    def format(data: Any, indent: int = 2, **kwargs) -> str:
+        return json.dumps(data, indent=indent, **kwargs)
+
+    @staticmethod
+    def build(*args) -> dict:
+        data = {}
+        count = 1
+        _count = 0
+
+        for i in range(len(list(args))):
+            if count > len(list(args)):
+                break
+            try:
+                data.update({args[_count]: args[count]})
+            except:
+                return data
+
+            count += 2
+            _count += 2
+
+        return data
+
+    @staticmethod
+    def load() -> Any:
+        file = GlobalJSON.file
+        if file is None:
+            raise RuntimeError("File not opened with JSON.open()")
+
+        try:
+            with open(f"{file}.json", "r") as jsonFile:
+                return json.load(jsonFile)
+        except:
+            return None
+
+    @staticmethod
+    @overload
+    def write(data: Any, **kwargs) -> None:
+        ...
+
+    @staticmethod
+    @overload
+    def write(data: Any, indent: Optional[Union[int, str]] = MISSING, **kwargs) -> None:
+        ...
+
+    @staticmethod
+    def write(data: Any, indent: int = MISSING, **kwargs) -> None:
+        file = GlobalJSON.file
+        if file is None:
+            raise RuntimeError("File not opened with JSON.open()")
+
+        if indent is MISSING:
+            indent = GlobalJSON.indent
+
+        try:
+            with open(f"{file}.json", "w") as jsonFile:
+                json.dump(data, jsonFile, indent=indent, **kwargs)
+        except:
+            return
+
+    @staticmethod
+    def get_data(self, variable) -> Any:
+        file = GlobalJSON.file
+        if file is None:
+            raise RuntimeError("File not opened with JSON.open()")
+
+        try:
+            data = self.load()
+            return data[variable]
+        except:
+            return None
+
+    @staticmethod
+    def register_value(self, variable, value) -> None:
+        file = GlobalJSON.file
+        if file is None:
+            raise RuntimeError("File not opened with JSON.open()")
+
+        try:
+            data = self.load()
+
+            data[variable] = value
+
+            self.write(data)
+        except:
+            data = {}
+            data[variable] = value
+
+            with open(f"{file}.json", "w") as jsonFile:
+                json.dump(data, jsonFile)

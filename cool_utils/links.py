@@ -33,8 +33,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import re
 from typing import TypeVar
 
-REGEX = "((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,4}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*"
-MISSING = 0.0
+from ._missing import MISSING
+
+REGEX = r"((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,4}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*"
 
 __all__ = (
 	'Links'
@@ -42,15 +43,19 @@ __all__ = (
 
 T = TypeVar('T', bound='Links')
 
+
 def get_slash():
 	slash = "\ "
 	slash = slash.replace(" ", "")
 	return slash
 
+
 class Links:
+	@staticmethod
 	def check(content: str) -> bool:
 		word_list = []
-		character_list = [';', get_slash(), '|', '-', '"', '&', '$', '@', '+', '^', '_', '<', '[', '!', '=', '>', '(', ')', '}', "'", '`', ']', '#', '%', '?', '*', '{', ',', '~']
+		character_list = [';', get_slash(), '|', '-', '"', '&', '$', '@', '+', '^', '_', '<', '[', '!', '=', '>', '(',
+		                  ')', '}', "'", '`', ']', '#', '%', '?', '*', '{', ',', '~']
 
 		for character in character_list:
 			text = content.replace(character, " ")
@@ -62,9 +67,11 @@ class Links:
 			else:
 				return False
 
+	@staticmethod
 	def censor(content: str, censor: str = "*") -> str:
 		word_list = []
-		character_list = [';', get_slash(), '|', '-', '"', '&', '$', '@', '+', '^', '_', '<', '[', '!', '=', '>', '(', ')', '}', "'", '`', ']', '#', '%', '?', '*', '{', ',', '~']
+		character_list = [';', get_slash(), '|', '-', '"', '&', '$', '@', '+', '^', '_', '<', '[', '!', '=', '>', '(',
+		                  ')', '}', "'", '`', ']', '#', '%', '?', '*', '{', ',', '~']
 
 		count = 0
 		string = ""
@@ -86,9 +93,11 @@ class Links:
 		else:
 			return string
 
+	@staticmethod
 	def find(content: str) -> list:
 		word_list = []
-		character_list = [';', get_slash(), '|', '-', '"', '&', '$', '@', '+', '^', '_', '<', '[', '!', '=', '>', '(', ')', '}', "'", '`', ']', '#', '%', '?', '*', '{', ',', '~']
+		character_list = [';', get_slash(), '|', '-', '"', '&', '$', '@', '+', '^', '_', '<', '[', '!', '=', '>', '(',
+		                  ')', '}', "'", '`', ']', '#', '%', '?', '*', '{', ',', '~']
 
 		link_list = []
 

@@ -30,16 +30,17 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from typing import TypeVar
 import itertools
+from typing import TypeVar
 
-MISSING = 0.0
+from ._missing import MISSING
 
 __all__ = (
 	'Compile'
 )
 
 T = TypeVar('T', bound='Compile')
+
 
 def check_type(list, item_type):
 	for item in list:
@@ -48,9 +49,11 @@ def check_type(list, item_type):
 		else:
 			raise TypeError(f"Only {item_type} is supported for this function.")
 
+
 class Compile:
+	@staticmethod
 	def all_possible_cases(
-		text: str
+			text: str
 	):
 		results = []
 		for x in itertools.product(*zip(text.upper(), text.lower())):
@@ -58,18 +61,19 @@ class Compile:
 			results.append(first)
 		return results
 
+	@staticmethod
 	def string(
-		string_list,
-		joints: str=MISSING,
-		startwith: str=MISSING,
-		endwith: str=MISSING
+			string_list,
+			joints: str = MISSING,
+			startswith: str = MISSING,
+			endswith: str = MISSING
 	):
 		if not isinstance(string_list, list):
 			raise TypeError(f"Only Lists are supported to be compiled.")
 		check_type(string_list, str)
 		compiled_string = ""
-		if startwith is not None:
-			compiled_string = startwith + compiled_string
+		if startswith is not None:
+			compiled_string = startswith + compiled_string
 		count = 0
 
 		for string in string_list:
@@ -79,22 +83,23 @@ class Compile:
 			count = count + 1
 		compiled_string = compiled_string[:-1]
 
-		if endwith is not None:
-			compiled_string = compiled_string + endwith
+		if endswith is not None:
+			compiled_string = compiled_string + endswith
 
 		return compiled_string
 
+	@staticmethod
 	def to_string(
-		item_list,
-		joints: str=MISSING,
-		startwith: str=MISSING,
-		endwith: str=MISSING
+			item_list,
+			joints: str = MISSING,
+			startswith: str = MISSING,
+			endswith: str = MISSING
 	):
 		if not isinstance(item_list, list):
 			raise TypeError(f"Only Lists are supported to be compiled.")
 		compiled_string = ""
-		if startwith is not None:
-			compiled_string = startwith + compiled_string
+		if startswith is not None:
+			compiled_string = startswith + compiled_string
 		count = 0
 
 		for string in item_list:
@@ -104,33 +109,34 @@ class Compile:
 			count = count + 1
 		compiled_string = compiled_string[:-1]
 
-		if endwith is not None:
-			compiled_string = compiled_string + endwith
+		if endswith is not None:
+			compiled_string = compiled_string + endswith
 
 		return compiled_string
 
+	@staticmethod
 	def numbers(
-		number_list,
-		joints: int=MISSING,
-		startwith: int=MISSING,
-		endwith: int=MISSING
+			number_list,
+			joints: int = MISSING,
+			startswith: int = MISSING,
+			endswith: int = MISSING
 	):
 		if not isinstance(number_list, list):
 			raise TypeError(f"Only Lists are supported to be compiled.")
 		check_type(number_list, int)
 		compiled_string = ""
-		if startwith is not None:
-			compiled_string = f"{startwith}" + compiled_string
+		if startswith is not None:
+			compiled_string = f"{startswith}"
 		count = 0
 
-		for string in list:
+		for string in number_list:
 			compiled_string = compiled_string + f"{string}"
 			if count is not len(list) and joints is not MISSING:
 				compiled_string = compiled_string + f"{joints}"
 			count = count + 1
 		compiled_string = compiled_string[:-1]
 
-		if endwith is not None:
-			compiled_string = compiled_string + f"{endwith}"
+		if endswith is not None:
+			compiled_string = compiled_string + f"{endswith}"
 
 		return int(compiled_string)

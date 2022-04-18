@@ -40,16 +40,17 @@ __all__ = (
 
 T = TypeVar('T', bound='Terminal')
 
+
 def get_command(command: str):
 	PYTHON = {
 		'linux': 'python3',
-		'win32': 'python',
+		'win32': 'py',
 		'macos': 'python3'
 	}
 
 	PIP = {
 		'linux': 'python3 -m pip',
-		'win32': 'pip',
+		'win32': 'py -m pip',
 		'macos': 'python3 -m pip'
 	}
 
@@ -65,7 +66,7 @@ def get_command(command: str):
 		'macos': 'ls'
 	}
 
-	OPTION = {
+	OPTIONS = {
 		"python": PYTHON,
 		"pip": PIP,
 		"clear": CLEAR,
@@ -74,9 +75,10 @@ def get_command(command: str):
 
 	command_lower = command.lower()
 	try:
-		return OPTION[command_lower][sys.platform]
+		return OPTIONS[command_lower][sys.platform]
 	except:
 		return command
+
 
 BOLD = "\033[1m"
 FAIL = "\033[91m"
@@ -84,51 +86,59 @@ WARNING = "\033[93m"
 WHITE = "\33[97m"
 RESET = "\033[0m"
 
+
 class Terminal:
 	format = "%d-%m-%Y | %H:%M:%S"
 	log = False
 	log_file = None
 	error_func = None
 
+	@staticmethod
 	def set_format(format: str):
 		Terminal.format = format
 
-	def start_log(name: str=None):
+	@staticmethod
+	def start_log(name: str = None):
 		Terminal.log = True
-		if name == None:
-			name = "latest"
+		name = name or "latest"
 		Terminal.log_file = name
 
+	@staticmethod
 	def stop_log():
 		Terminal.log = False
 		Terminal.log_file = None
 
+	@staticmethod
 	def display(content):
 		time = datetime.now()
-		if Terminal.log == True:
+		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] INFO: ") + f"{content}" + "\n")
 		print(BOLD + WHITE + time.strftime(f"[{Terminal.format}] INFO: ") + RESET + WHITE + f"{content}")
 
+	@staticmethod
 	def warn(content):
 		time = datetime.now()
-		if Terminal.log == True:
+		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] WARNING: ") + f"{content}" + "\n")
 		print(BOLD + WARNING + time.strftime(f"[{Terminal.format}] WARNING: ") + RESET + WARNING + f"{content}")
 
+	@staticmethod
 	def error(content):
 		time = datetime.now()
-		if Terminal.log == True:
+		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] ERROR: ") + f"{content}" + "\n")
 		print(BOLD + FAIL + time.strftime(f"[{Terminal.format}] ERROR: ") + RESET + FAIL + f"{content}")
-		if Terminal.error_func != None:
+		if Terminal.error_func is not None:
 			return Terminal.error_func()
 
+	@staticmethod
 	def on_error(function) -> None:
 		Terminal.error_func = function
 		return None
 
+	@staticmethod
 	def clear():
 		os.system(get_command("clear"))
