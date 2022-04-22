@@ -93,14 +93,17 @@ class JSON:
         except:
             return None
 
+    @classmethod
     @overload
     def write(self, data: Any, **kwargs) -> None:
         ...
 
+    @classmethod
     @overload
     def write(self, data: Any, indent: Optional[Union[int, str]], **kwargs) -> None:
         ...
 
+    @classmethod
     def write(self, data: Any, indent: int = MISSING, **kwargs) -> None:
         file = self._check_file()
 
@@ -113,6 +116,7 @@ class JSON:
         except:
             return
 
+    @classmethod
     def get_data(self, variable) -> Any:
         file = self._check_file()
 
@@ -122,6 +126,7 @@ class JSON:
         except:
             return None
 
+    @classmethod
     def register_value(self, variable, value) -> None:
         file = self._check_file()
 
@@ -211,29 +216,29 @@ class GlobalJSON:
             return
 
     @staticmethod
-    def get_data(self, variable) -> Any:
+    def get_data(variable) -> Any:
         file = GlobalJSON.file
         if file is None:
             raise RuntimeError("File not opened with JSON.open()")
 
         try:
-            data = self.load()
+            data = GlobalJSON.load()
             return data[variable]
         except:
             return None
 
     @staticmethod
-    def register_value(self, variable, value) -> None:
+    def register_value(variable, value) -> None:
         file = GlobalJSON.file
         if file is None:
             raise RuntimeError("File not opened with JSON.open()")
 
         try:
-            data = self.load()
+            data = GlobalJSON.load()
 
             data[variable] = value
 
-            self.write(data)
+            GlobalJSON.write(data)
         except:
             data = {}
             data[variable] = value
