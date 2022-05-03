@@ -63,7 +63,7 @@ class Compile:
 
 	@staticmethod
 	def string(
-			string_list,
+			string_list: list,
 			joints: str = MISSING,
 			startswith: str = MISSING,
 			endswith: str = MISSING
@@ -74,14 +74,8 @@ class Compile:
 		compiled_string = ""
 		if startswith is not None:
 			compiled_string = startswith + compiled_string
-		count = 0
 
-		for string in string_list:
-			compiled_string = compiled_string + string
-			if count is not len(string_list) and joints is not MISSING:
-				compiled_string = compiled_string + joints
-			count = count + 1
-		compiled_string = compiled_string[:-1]
+		compiled_string = joints.joint(string_list)
 
 		if endswith is not None:
 			compiled_string = compiled_string + endswith
@@ -90,7 +84,7 @@ class Compile:
 
 	@staticmethod
 	def to_string(
-			item_list,
+			item_list: list,
 			joints: str = MISSING,
 			startswith: str = MISSING,
 			endswith: str = MISSING
@@ -100,14 +94,8 @@ class Compile:
 		compiled_string = ""
 		if startswith is not None:
 			compiled_string = startswith + compiled_string
-		count = 0
 
-		for string in item_list:
-			compiled_string = compiled_string + f"{string}"
-			if count is not len(item_list) and joints is not MISSING:
-				compiled_string = compiled_string + joints
-			count = count + 1
-		compiled_string = compiled_string[:-1]
+		compiled_string = joints.joint(item_list)
 
 		if endswith is not None:
 			compiled_string = compiled_string + endswith
@@ -127,14 +115,8 @@ class Compile:
 		compiled_string = ""
 		if startswith is not None:
 			compiled_string = f"{startswith}"
-		count = 0
 
-		for string in number_list:
-			compiled_string = compiled_string + f"{string}"
-			if count is not len(list) and joints is not MISSING:
-				compiled_string = compiled_string + f"{joints}"
-			count = count + 1
-		compiled_string = compiled_string[:-1]
+		compiled_string = joints.joint(number_list)
 
 		if endswith is not None:
 			compiled_string = compiled_string + f"{endswith}"
