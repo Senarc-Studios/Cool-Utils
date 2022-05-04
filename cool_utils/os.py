@@ -93,7 +93,7 @@ SCHEME = {
 }
 
 def format_(content: str, type_: str):
-	content = content.replace(
+	return content.replace(
 		"%bold%",
 		BOLD
 	).replace(
@@ -154,8 +154,8 @@ class Terminal:
 		time = datetime.now()
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
-			content = format_(content)
 			file.write(time.strftime(f"[{Terminal.format}] INFO: ") + f"{content}" + "\n")
+			content = format_(content, "display")
 		print(BOLD + WHITE + time.strftime(f"[{Terminal.format}] INFO: ") + RESET + WHITE + f"{content}" + RESET)
 
 	@staticmethod
@@ -164,6 +164,7 @@ class Terminal:
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] WARNING: ") + f"{content}" + "\n")
+			content = format_(content, "warn")
 		print(BOLD + WARNING + time.strftime(f"[{Terminal.format}] WARNING: ") + RESET + WARNING + f"{content}" + RESET)
 
 	@staticmethod
@@ -172,6 +173,7 @@ class Terminal:
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] ERROR: ") + f"{content}" + "\n")
+			content = format_(content, "error")
 		print(BOLD + FAIL + time.strftime(f"[{Terminal.format}] ERROR: ") + RESET + FAIL + f"{content}" + RESET)
 		if Terminal.error_func is not None:
 			return Terminal.error_func()
