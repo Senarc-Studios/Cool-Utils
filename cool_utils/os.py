@@ -164,7 +164,7 @@ class Terminal:
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
 			file.write(time.strftime(f"[{Terminal.format}] WARNING: ") + f"{content}" + "\n")
-			content = format_(content, "warn")
+			content = format_(content, "warning")
 		print(BOLD + WARNING + time.strftime(f"[{Terminal.format}] WARNING: ") + RESET + WARNING + f"{content}" + RESET)
 
 	@staticmethod
