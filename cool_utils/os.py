@@ -85,13 +85,54 @@ FAIL = "\033[91m"
 WARNING = "\033[93m"
 WHITE = "\33[97m"
 RESET = "\033[0m"
+BLUE = "1;34"
+SCHEME = {
+	"display": WHITE,
+	"error": FAIL,
+	"warning": WARNING
+}
 
+def format_(content: str, type_: str):
+	content = content.replace(
+		"%bold%",
+		BOLD
+	).replace(
+		"%red%",
+		FAIL
+	).replace(
+		"%yellow%",
+		WARNING
+	).replace(
+		"%white%",
+		WHITE
+	).replace(
+		"%r%",
+		SCHEME.get(type_)
+	)
 
 class Terminal:
 	format = "%d-%m-%Y | %H:%M:%S"
 	log = False
 	log_file = None
 	error_func = None
+
+	@staticmethod
+	def colour(red, green, blue, bg) -> str:
+		if bg is not False and red is not None and green is not None and blue is not None:
+			return f'\u001b[38;2;{red};{green};{blue}m'
+		elif bg is True and red is not None and green is not None and blue is not None:
+			return f'\u001b[48;2;{red};{green};{blue}m'
+		elif red is None and green is None and blue is None:
+			return '\u001b[0m'
+
+	@staticmethod
+	def color(red, green, blue, bg) -> str:
+		if bg is not False and red is not None and green is not None and blue is not None:
+			return f'\u001b[38;2;{red};{green};{blue}m'
+		elif bg is True and red is not None and green is not None and blue is not None:
+			return f'\u001b[48;2;{red};{green};{blue}m'
+		elif red is None and green is None and blue is None:
+			return '\u001b[0m'
 
 	@staticmethod
 	def set_format(format: str):
@@ -113,6 +154,7 @@ class Terminal:
 		time = datetime.now()
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
+			content = format_(content)
 			file.write(time.strftime(f"[{Terminal.format}] INFO: ") + f"{content}" + "\n")
 		print(BOLD + WHITE + time.strftime(f"[{Terminal.format}] INFO: ") + RESET + WHITE + f"{content}" + RESET)
 
