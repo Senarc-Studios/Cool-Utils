@@ -203,7 +203,7 @@ class GlobalJSON:
             return
 
     @staticmethod
-    def get_data(variable) -> Any:
+    def get(variable) -> Any:
         file = GlobalJSON.file
         if file is None:
             raise RuntimeError("File not opened with JSON.open()")
