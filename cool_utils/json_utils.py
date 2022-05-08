@@ -43,7 +43,7 @@ T = TypeVar('T', bound='JSON')
 G = TypeVar('G', bound='GlobalJSON')
 
 class JSON:
-    def __init__(self, file: str, *, indent: Optional[Union[int, str]] = None) -> None:
+    def __init__(self, file: str, *, indent: Optional[int] = 4) -> None:
         self.file = file
         self.indent = indent
 
@@ -55,7 +55,7 @@ class JSON:
         return cls(file)
 
     @staticmethod
-    def format(data: Any, indent: int = 2, **kwargs) -> str:
+    def format(data: Any, indent: int = 4, **kwargs) -> str:
         return json.dumps(data, indent=indent, **kwargs)
 
     @staticmethod
@@ -99,12 +99,7 @@ class JSON:
         ...
 
     @classmethod
-    @overload
-    def write(self, data: Any, indent: Optional[Union[int, str]], **kwargs) -> None:
-        ...
-
-    @classmethod
-    def write(self, data: Any, indent: int = MISSING, **kwargs) -> None:
+    def write(self, data: Any, indent: Optional[int] = MISSING, **kwargs) -> None:
         file = self._check_file()
 
         if indent is MISSING:
@@ -113,18 +108,15 @@ class JSON:
         try:
             with open(f"{file}.json", "w") as jsonFile:
                 json.dump(data, jsonFile, indent=indent, **kwargs)
-        except:
-            return
+        except Exception as error:
+            raise RuntimeError("Exception on JSON.write(...):\n" + error)
 
     @classmethod
-    def get_data(self, variable) -> Any:
+    def get(self, variable) -> Any:
         file = self._check_file()
 
-        try:
-            data = self.load()
-            return data[variable]
-        except:
-            return None
+        data = self.load()
+        return data.get(variable)
 
     @classmethod
     def register_value(self, variable, value) -> None:
@@ -149,14 +141,17 @@ class GlobalJSON:
     indent: Optional[Union[int, str]] = None
 
     @staticmethod
-    def open(file: str) -> None:
+    def open(file: str, indent: int = 4) -> None:
         if file.endswith(".json"):
             file = file[:-5]
 
         GlobalJSON.file = file
+        GlobalJSON.file = indent
 
     @staticmethod
-    def format(data: Any, indent: int = 2, **kwargs) -> str:
+    def format(data: Any, indent: int = MISSING, **kwargs) -> str:
+        if indent is MISSING:
+            indent = GlobalJSON.indent
         return json.dumps(data, indent=indent, **kwargs)
 
     @staticmethod
@@ -179,25 +174,17 @@ class GlobalJSON:
         return data
 
     @staticmethod
-    def load() -> Any:
+    def load() -> dict:
         file = GlobalJSON.file
         if file is None:
             raise RuntimeError("File not opened with JSON.open()")
 
-        try:
-            with open(f"{file}.json", "r") as jsonFile:
-                return json.load(jsonFile)
-        except:
-            return None
+        with open(f"{file}.json", "r") as jsonFile:
+            return json.load(jsonFile)
 
     @staticmethod
     @overload
     def write(data: Any, **kwargs) -> None:
-        ...
-
-    @staticmethod
-    @overload
-    def write(data: Any, indent: Optional[Union[int, str]] = MISSING, **kwargs) -> None:
         ...
 
     @staticmethod
@@ -221,11 +208,8 @@ class GlobalJSON:
         if file is None:
             raise RuntimeError("File not opened with JSON.open()")
 
-        try:
-            data = GlobalJSON.load()
-            return data[variable]
-        except:
-            return None
+        data = GlobalJSON.load()
+        return data.get(variable)
 
     @staticmethod
     def register_value(variable, value) -> None:
