@@ -199,8 +199,8 @@ class GlobalJSON:
         try:
             with open(f"{file}.json", "w") as jsonFile:
                 json.dump(data, jsonFile, indent=indent, **kwargs)
-        except:
-            return
+        except Exception as error:
+            raise RuntimeError("Exception on JSON.write(...):\n" + error)
 
     @staticmethod
     def get(variable) -> Any:
