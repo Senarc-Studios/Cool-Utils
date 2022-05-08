@@ -54,8 +54,10 @@ class JSON:
 
         return cls(file)
 
-    @staticmethod
-    def format(data: Any, indent: int = 4, **kwargs) -> str:
+    @classmethod
+    def format(self, data: Any, indent: int = MISSING, **kwargs) -> str:
+        if indent is MISSING:
+            indent = self.indent
         return json.dumps(data, indent=indent, **kwargs)
 
     @staticmethod
