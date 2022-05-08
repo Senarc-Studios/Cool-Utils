@@ -53,8 +53,11 @@ def get_slash():
 
 
 class Links:
-	@staticmethod
-	def check(content: str) -> bool:
+	def __init__(self, whitelist: list = []):
+		self.whitelist = whitelist
+
+	@classmethod
+	def check(self, content: str) -> bool:
 		word_list = []
 		ascii_chars = list(string.ascii_uppercase + string.ascii_lowercase + "0123456789.")
 
@@ -68,13 +71,13 @@ class Links:
 			_count += 1
 			if word == ".":
 				return True
-			if re.match(REGEX, word):
+			if re.match(REGEX, word) and word not in self.whitelist:
 				return True
 			else:
 				return False
 
-	@staticmethod
-	def censor(content: str, censor: str = "*", strict: bool = True) -> str:
+	@classmethod
+	def censor(self, content: str, censor: str = "*", strict: bool = True) -> str:
 		word_list = []
 		if strict:
 			_processed_words = []
@@ -100,7 +103,7 @@ class Links:
 						continue
 					except IndexError:
 						break
-				if re.match(REGEX, word):
+				if re.match(REGEX, word) and word not in self.whitelist:
 					count += 1
 					word = "".join([censor for i in range(len(word))])
 				_processed_words.append(word)
@@ -127,7 +130,7 @@ class Links:
 			for word in text.split(" "):
 				word_list.append(word)
 			for word in word_list:
-				if re.match(REGEX, word):
+				if re.match(REGEX, word) and word not in self.whitelist:
 					count += 1
 					word = "".join([censor for i in range(len(word))])
 
@@ -139,8 +142,8 @@ class Links:
 			else:
 				return _string
 
-	@staticmethod
-	def find(content: str) -> list:
+	@classmethod
+	def find(self, content: str) -> list:
 		word_list = []
 		ascii_chars = list(string.ascii_uppercase + string.ascii_lowercase + "0123456789.")
 
@@ -156,7 +159,7 @@ class Links:
 			count += 1
 			if word == ".":
 				word = word_list[count - 1] + word + word_list[count + 1]
-			if re.match(REGEX, word):
+			if re.match(REGEX, word) and word not in self.whitelist:
 				link_list.append(word)
 			else:
 				continue
