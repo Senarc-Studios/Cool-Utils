@@ -117,7 +117,7 @@ class Terminal:
 	error_func = None
 
 	@staticmethod
-	def colour(red, green, blue, bg) -> str:
+	def colour(red: int, green: int, blue: int, bg: bool = False) -> str:
 		if bg is not False and red is not None and green is not None and blue is not None:
 			return f'\u001b[38;2;{red};{green};{blue}m'
 		elif bg is True and red is not None and green is not None and blue is not None:
@@ -126,7 +126,7 @@ class Terminal:
 			return '\u001b[0m'
 
 	@staticmethod
-	def color(red, green, blue, bg) -> str:
+	def color(red: int, green: int, blue: int, bg: bool = False) -> str:
 		if bg is not False and red is not None and green is not None and blue is not None:
 			return f'\u001b[38;2;{red};{green};{blue}m'
 		elif bg is True and red is not None and green is not None and blue is not None:
