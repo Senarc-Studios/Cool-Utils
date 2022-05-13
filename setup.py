@@ -21,7 +21,7 @@ setup(
 	project_urls={
 		"Documentation": "https://cool-utils.senarc.org",
 		"Issue tracker": "https://github.com/Senarc-Studios/Cool-Utils/issues",
-		"Github": "https://github.com/Senarc-Studios/Cool-Utils/tree/Development"
+		"Github": "https://github.com/Senarc-Studios/Cool-Utils"
 	},
 	version="1.3.2",
 	packages=packages,
