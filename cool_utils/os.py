@@ -128,24 +128,6 @@ class Terminal:
 	error_func = None
 
 	@staticmethod
-	def colour(red: int, green: int, blue: int, bg: bool = False) -> str:
-		if bg is False and red is not None and green is not None and blue is not None:
-			return f'\u001b[38;2;{red};{green};{blue}m'
-		elif bg is True and red is not None and green is not None and blue is not None:
-			return f'\u001b[48;2;{red};{green};{blue}m'
-		elif red is None and green is None and blue is None:
-			return '\u001b[0m'
-
-	@staticmethod
-	def color(red: int, green: int, blue: int, bg: bool = False) -> str:
-		if bg is False and red is not None and green is not None and blue is not None:
-			return f'\u001b[38;2;{red};{green};{blue}m'
-		elif bg is True and red is not None and green is not None and blue is not None:
-			return f'\u001b[48;2;{red};{green};{blue}m'
-		elif red is None and green is None and blue is None:
-			return '\u001b[0m'
-
-	@staticmethod
 	def set_format(format: str):
 		Terminal.format = format
 
