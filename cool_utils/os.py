@@ -85,7 +85,9 @@ FAIL = "\033[91m"
 WARNING = "\033[93m"
 WHITE = "\33[97m"
 RESET = "\033[0m"
-BLUE = "1;34"
+AQUA = "\033[96m"
+BLUE = "\033[34m"
+GREEN = "\033[92m"
 SCHEME = {
 	"display": WHITE,
 	"error": FAIL,
@@ -103,6 +105,15 @@ def format_(content: str, type_: str):
 		"%yellow%",
 		WARNING
 	).replace(
+		"%aqua%",
+		AQUA
+	).replace(
+		"%blue%",
+		BLUE
+	).replace(
+		"%green%",
+		GREEN
+	).replace(
 		"%white%",
 		WHITE
 	).replace(
@@ -118,7 +129,7 @@ class Terminal:
 
 	@staticmethod
 	def colour(red: int, green: int, blue: int, bg: bool = False) -> str:
-		if bg is not False and red is not None and green is not None and blue is not None:
+		if bg is False and red is not None and green is not None and blue is not None:
 			return f'\u001b[38;2;{red};{green};{blue}m'
 		elif bg is True and red is not None and green is not None and blue is not None:
 			return f'\u001b[48;2;{red};{green};{blue}m'
@@ -127,7 +138,7 @@ class Terminal:
 
 	@staticmethod
 	def color(red: int, green: int, blue: int, bg: bool = False) -> str:
-		if bg is not False and red is not None and green is not None and blue is not None:
+		if bg is False and red is not None and green is not None and blue is not None:
 			return f'\u001b[38;2;{red};{green};{blue}m'
 		elif bg is True and red is not None and green is not None and blue is not None:
 			return f'\u001b[48;2;{red};{green};{blue}m'
@@ -150,7 +161,7 @@ class Terminal:
 		Terminal.log_file = None
 
 	@staticmethod
-	def display(content):
+	def display(content: str):
 		time = datetime.now()
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
@@ -159,7 +170,7 @@ class Terminal:
 		print(BOLD + WHITE + time.strftime(f"[{Terminal.format}] INFO: ") + RESET + WHITE + f"{content}" + RESET)
 
 	@staticmethod
-	def warn(content):
+	def warn(content: str):
 		time = datetime.now()
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
@@ -168,7 +179,7 @@ class Terminal:
 		print(BOLD + WARNING + time.strftime(f"[{Terminal.format}] WARNING: ") + RESET + WARNING + f"{content}" + RESET)
 
 	@staticmethod
-	def error(content):
+	def error(content: str):
 		time = datetime.now()
 		if Terminal.log is True:
 			file = open(f"{Terminal.log_file}.log", "a")
