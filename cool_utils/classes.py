@@ -30,14 +30,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from typing import Any, TypeVar
-
-__all__ = (
-	'Array'
-)
-
-T = TypeVar('T', bound='Array')
-
+from typing import Any
 
 class Array:
 	def __init__(self, type: Any, size: int):

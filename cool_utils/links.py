@@ -33,18 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import re
 import string
 
-from typing import TypeVar
-
-from ._missing import MISSING
-
 REGEX = r"((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,4}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*"
-
-__all__ = (
-	'Links'
-)
-
-T = TypeVar('T', bound='Links')
-
 
 def get_slash():
 	slash = "\ "

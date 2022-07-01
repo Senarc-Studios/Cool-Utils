@@ -31,16 +31,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import json
-from typing import TypeVar, Any, Optional, Union, overload
+from typing import Any, Optional, Union, overload
 
 from ._missing import MISSING
-
-__all__ = (
-    'JSON'
-)
-
-T = TypeVar('T', bound='JSON')
-G = TypeVar('G', bound='GlobalJSON')
 
 class JSON:
     def __init__(self, file: str, *, indent: Optional[int] = 4) -> None:

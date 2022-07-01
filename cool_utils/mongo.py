@@ -32,14 +32,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import asyncio
 
 from motor.motor_asyncio import AsyncIOMotorClient
-from typing import TypeVar
-
-__all__ = (
-	'Mongo'
-)
-
-T = TypeVar('T', bound='Mongo')
-
 
 class Mongo:
 	def __init__(self, mongo_url, database):

@@ -31,16 +31,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import itertools
-from typing import TypeVar
 
 from ._missing import MISSING
-
-__all__ = (
-	'Compile'
-)
-
-T = TypeVar('T', bound='Compile')
-
 
 def check_type(list, item_type):
 	for item in list:

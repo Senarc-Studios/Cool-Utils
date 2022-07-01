@@ -32,14 +32,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import os
 import sys
 from datetime import datetime
-from typing import TypeVar
-
-__all__ = (
-	'Terminal'
-)
-
-T = TypeVar('T', bound='Terminal')
-
 
 def get_command(command: str):
 	WIN_COMMANDS = {

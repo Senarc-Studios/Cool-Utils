@@ -30,20 +30,13 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from typing import TypeVar, Any, Optional, overload
+from typing import Any, Optional, overload
 
 from ._missing import MISSING
 
 _cache = {
 	"_size": 0,  # linter = bad
 }
-
-__all__ = (
-	'Cache'
-)
-
-T = TypeVar('T', bound='Cache')
-
 
 class GlobalCache:
 	@staticmethod
