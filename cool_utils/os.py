@@ -42,40 +42,28 @@ T = TypeVar('T', bound='Terminal')
 
 
 def get_command(command: str):
-	PYTHON = {
-		'linux': 'python3',
-		'win32': 'py',
-		'macos': 'python3'
+	WIN_COMMANDS = {
+		"python": "python",
+		"pip": "python -m pip",
+		"ls": "dir",
+		"clear": "cls"
 	}
 
-	PIP = {
-		'linux': 'python3 -m pip',
-		'win32': 'py -m pip',
-		'macos': 'python3 -m pip'
+	UNIX_COMMANDS = {
+		"python": "python3",
+		"pip": "python3 -m pip",
+		"ls": "ls",
+		"clear": "clear"
 	}
-
-	CLEAR = {
-		'linux': 'clear',
-		'win32': 'cls',
-		'macos': 'clear'
-	}
-
-	LS = {
-		'linux': 'ls',
-		'win32': 'dir',
-		'macos': 'ls'
-	}
-
+	
 	OPTIONS = {
-		"python": PYTHON,
-		"pip": PIP,
-		"clear": CLEAR,
-		"ls": LS
+		"win32": WIN_COMMANDS,
+		"other": UNIX_COMMANDS
 	}
 
 	command_lower = command.lower()
 	try:
-		return OPTIONS[command_lower][sys.platform]
+		return OPTIONS[sys.platform][command.lower()] if sys.platform == "win32" else OPTIONS["other"][command.lower()]
 	except:
 		return command
 
