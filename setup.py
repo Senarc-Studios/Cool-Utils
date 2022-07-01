@@ -15,7 +15,7 @@ packages = [
 
 setup(
 	name="cool-utils",
-	author="Benitz Original",
+	author="BenitzCoding",
 	author_email="benitzcoding@yahoo.com",
 	url="https://github.com/Senarc-Studios/Cool-Utils",
 	project_urls={
