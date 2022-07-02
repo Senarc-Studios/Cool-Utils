@@ -36,25 +36,58 @@ from typing import Any, Optional, Union, overload
 from ._missing import MISSING
 
 class JSON:
-    def __init__(self, file: str, *, indent: Optional[int] = 4) -> None:
+    def __init__(self, file: Optional[str], *, indent: Optional[int] = 4) -> None:
         self.file = file
         self.indent = indent
 
     @classmethod
-    def open(cls, file: str) -> T:
+    def open(cls, file: str) -> None:
+        """Open a JSON file to work with.
+
+        Args:
+            file (str): The JSON file you want to work on.
+
+        Example:
+            >>> JSON.open("/path/to/my_file.json")
+
+        Returns:
+           _type_: None
+        """
         if file.endswith(".json"):
             file = file[:-5]
 
-        return cls(file)
+        cls.file = file
 
     @classmethod
     def format(self, data: Any, indent: int = MISSING, **kwargs) -> str:
+        """Format a JSON dict to a string.
+
+        Args:
+            data (dict): The JSON data you'd like to format.
+
+        Example:
+            >>> JSON.format({"key": "value"}, indent = 4)
+
+        Returns:
+            _type_: str
+        """
         if indent is MISSING:
             indent = self.indent
         return json.dumps(data, indent=indent, **kwargs)
 
     @staticmethod
     def build(*args) -> dict:
+        """Build a JSON dict from arguments.
+        
+        Args:
+            *args (Any): The arguments you'd like to build the JSON dict from.
+            
+        Example:
+            >>> JSON.build("key", "value", "foo", "bar") # returns {"key": "value", "foo": "bar"}
+
+        Returns:
+            _type_: dict
+        """
         data = {}
         count = 1
         _count = 0
@@ -95,6 +128,17 @@ class JSON:
 
     @classmethod
     def write(self, data: Any, indent: Optional[int] = MISSING, **kwargs) -> None:
+        """Write a JSON dict to a file.
+
+        Args:
+            data (dict): The JSON data you'd like to write.
+
+        Example:
+            >>> JSON.write({"key": "value"}, indent = 4)
+
+        Returns:
+            _type_: None
+        """
         file = self._check_file()
 
         if indent is MISSING:
@@ -108,6 +152,17 @@ class JSON:
 
     @classmethod
     def get(self, variable) -> Any:
+        """Get a variable from a JSON file.
+
+        Args:
+            variable (str): The variable you'd like to get.
+
+        Example:
+            >>> JSON.get("key")
+
+        Returns:
+            _type_: Any
+        """
         file = self._check_file()
 
         data = self.load()
@@ -137,6 +192,17 @@ class GlobalJSON:
 
     @staticmethod
     def open(file: str, indent: int = 4) -> None:
+        """Open a JSON file to work with.
+
+        Args:
+            file (str): The JSON file you want to work on.
+
+        Example:
+            >>> GlobalJSON.open("/path/to/my_file.json")
+
+        Returns:
+              _type_: None
+        """
         if file.endswith(".json"):
             file = file[:-5]
 
@@ -145,12 +211,34 @@ class GlobalJSON:
 
     @staticmethod
     def format(data: Any, indent: int = MISSING, **kwargs) -> str:
+        """Format a JSON dict to a string.
+
+        Args:
+            data (dict): The JSON data you'd like to format.
+
+        Example:
+            >>> GlobalJSON.format({"key": "value"}, indent = 4)
+
+        Returns:
+            _type_: str
+        """
         if indent is MISSING:
             indent = GlobalJSON.indent
         return json.dumps(data, indent=indent, **kwargs)
 
     @staticmethod
     def build(*args) -> dict:
+        """Build a JSON dict from arguments.
+
+        Args:
+            *args (Any): The arguments you'd like to build the JSON dict from.
+
+        Example:
+            >>> GlobalJSON.build("key", "value", "foo", "bar") # returns {"key": "value", "foo": "bar"}
+
+        Returns:
+            _type_: dict
+        """
         data = {}
         count = 1
         _count = 0
