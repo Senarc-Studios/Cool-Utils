@@ -53,7 +53,6 @@ def get_command(command: str):
 		"other": UNIX_COMMANDS
 	}
 
-	command_lower = command.lower()
 	try:
 		return OPTIONS[sys.platform][command.lower()] if sys.platform == "win32" else OPTIONS["other"][command.lower()]
 	except:
@@ -106,6 +105,10 @@ class Terminal:
 	log = False
 	log_file = None
 	error_func = None
+
+	@staticmethod
+	def apply_format(content: str, type_: str):
+		return format_(content, type_)
 
 	@staticmethod
 	def set_format(format: str):

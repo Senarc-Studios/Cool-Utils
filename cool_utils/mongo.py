@@ -40,7 +40,6 @@ class Mongo:
 		self.client = cluster
 		self.db = self.client[database]
 
-	@classmethod
 	async def collection(self, name: str):
 		return self.db[name]
 
