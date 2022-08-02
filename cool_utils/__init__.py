@@ -36,7 +36,7 @@ __license__ = 'BSD'
 __copyright__ = 'Copyright 2021-present BenitzCoding'
 __version__ = '1.3.3'
 
-from .compile import Compile
+from .compile import Compile, CompileToObject
 from .json_utils import JSON, GlobalJSON
 from .os import Terminal, get_command
 from .cache import Cache, GlobalCache

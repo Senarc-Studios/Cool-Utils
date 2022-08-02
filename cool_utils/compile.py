@@ -114,3 +114,13 @@ class Compile:
 			compiled_string = compiled_string + f"{endswith}"
 
 		return int(compiled_string)
+
+class CompileToObject:
+	def __init__(self, json: dict) -> object:
+		for key, value in json.items():
+			if not isinstance(key, str):
+				raise TypeError(f"Only Strings are supported to be compiled.")
+					
+			setattr(self, key, value)
+
+		return self
