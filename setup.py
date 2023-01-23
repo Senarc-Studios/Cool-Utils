@@ -19,7 +19,7 @@ setup(
 	author_email="benitzcoding@yahoo.com",
 	url="https://github.com/Senarc-Studios/Cool-Utils",
 	project_urls={
-		"Documentation": "https://cool-utils.senarc.org",
+		"Documentation": "https://cool-utils.senarc.online",
 		"Issue tracker": "https://github.com/Senarc-Studios/Cool-Utils/issues",
 		"Github": "https://github.com/Senarc-Studios/Cool-Utils"
 	},
